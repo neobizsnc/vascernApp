@@ -1,0 +1,28 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="blue">
+    <ion-title>RARE DISEASE</ion-title>
+  </ion-navbar>
+  <ion-searchbar spellcheck="true" placeholder="TYPE HERE" [(ngModel)]="terms"></ion-searchbar>
+  <div id="btn-ctn">
+    <button ion-button type="button" (click)="sort()">Last Search</button>
+    <button ion-button type="button" (click)="sort()">A-Z List</button> 
+  </div>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let c of structures | search : terms | sort: { property: column, order: order }; let i = index">
+      <div (click)="goTo(c.name, c.orphacode, c.website, c.id)">
+          <h2>{{c.name}}</h2>
+          <p>{{c.orphacode}}</p>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

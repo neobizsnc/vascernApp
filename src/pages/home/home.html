@@ -1,17 +1,40 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+<ion-header #header>
+    <ion-navbar color="blue">
+      <ion-title>HCP & ASSOCIATION </ion-title>
+    </ion-navbar>
+    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Address, city or zip Code"></ion-searchbar>
+    <div id="legend">
+      <img src="assets/imgs/hcp.png">
+      <span class="blue">HCP</span>
+      <img class="orange-img" src="assets/imgs/association.png">
+      <span class="orange">Association</span>
+    </div>
 </ion-header>
-
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+    
+<ion-content no-padding>
+  <ion-list [hidden]="autocompleteItems.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <div id="map_canvas"  [ngStyle]="setStyles()">
+    <ion-slides  (ionSlideDidChange)="slideChanged()">
+      <ion-slide class="slide" *ngFor="let structure of structures ">
+        <h1 class="center-name">{{ structure.hcpCenter.name }}</h1>
+        <p class="center-info">{{ structure.hcpCenter.address }}, {{ structure.hcpCenter.zipcode }} - {{ structure.hcpCenter.city }}</p>
+        <button ion-button icon-only (click)="call(3441176641)">
+          <ion-icon name="md-call"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="maps(structure.hcpCenter.address, structure.hcpCenter.zipcode, structure.hcpCenter.city, structure.hcpCenter.country)">
+          <ion-icon name="md-map"></ion-icon>
+        </button>
+        <button id="goto-scheda" (click)="goTo(structure.hcpCenter)" ion-button>
+          <ion-icon name="ios-add-circle-outline"></ion-icon>
+        </button>
+        <button id="favourite" ion-button>
+          <ion-icon name="ios-star-outline"></ion-icon>
+        </button>
+      </ion-slide>
+    </ion-slides>
+  </div>
 </ion-content>
