@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { SchedaPage } from '../scheda/scheda';
-
+import { AboutPage } from '../about/about';
+import { CreditsPage } from '../credits/credits';
+import { TutorialInactivePage } from '../tutorial-inactive/tutorial-inactive';
 /**
  * Generated class for the MenuPage page.
  *
@@ -18,9 +19,16 @@ export class MenuPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
-  goTo() {
-    let profileModal = this.modalCtrl.create(SchedaPage, { userId: 8675309 });
-    profileModal.present();
+  goToAbout() {
+    this.navCtrl.push(AboutPage);
+  }
+
+  goToCredits() {
+    this.navCtrl.push(CreditsPage);
+  }
+
+  goToUse() {
+    this.navCtrl.push(TutorialInactivePage);
   }
  
   ionViewDidLoad() {

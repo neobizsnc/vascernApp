@@ -23,7 +23,9 @@ import 'rxjs/add/operator/timeout';
 export class FavouritePage {
 
   @ViewChild(Slides) slides: Slides;
+
   structures:any[] = [];
+  favourites:any[] = [];
 
   constructor(public nativeStorage: NativeStorage, public modalCtrl: ModalController,private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     console.log("con structor")
@@ -50,6 +52,7 @@ export class FavouritePage {
     this.nativeStorage.getItem('favourite')
     .then(
       data => {
+        this.favourites = data;
         data.forEach(element => {
           this.loadStructure(element);
         });
@@ -89,5 +92,23 @@ export class FavouritePage {
      profileModal.present();
   }
 
+  setStorage() {
+    this.nativeStorage.clear()
+    this.nativeStorage.remove('favourite')
+    this.nativeStorage.setItem('favourite', this.favourites)
+      .then(
+        () => {
+          console.log('Stored item!')
+        }, 
+        error => console.error('Error storing item', error)
+      );
+  }
+
+  deleteFavourite(id) {
+    if(this.favourites.indexOf(id) !== -1) {
+      this.favourites.splice(this.favourites.indexOf(id), 1);
+      this.setStorage();
+    }
+  }
 
 }

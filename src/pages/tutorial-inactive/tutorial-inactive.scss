@@ -1,0 +1,47 @@
+page-tutorial-inactive {
+
+    ion-content {
+      background: #31aebb;
+    background: -moz-linear-gradient(top, #31aebb 0%, #3599b6 50%, #3b7cb0 100%);
+    background: -webkit-linear-gradient(top, #31aebb 0%,#3599b6 50%,#3b7cb0 100%);
+    background: linear-gradient(to bottom, #31aebb 0%,#3599b6 50%,#3b7cb0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31aebb', endColorstr='#3b7cb0',GradientType=0 );
+    }
+  
+    .swiper-slide {
+      align-items: flex-start!important;
+    }
+  
+    ion-slide img {
+      width: 80% !important;
+    }
+    
+    ion-slide p {
+      font-size: 25px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+  
+    ion-slide button {
+      font-size: 25px;
+      text-transform: uppercase;
+      background: #FFFFFF;
+      padding: 15px 30px!important;
+      color: #3b7cb0!important;
+    }
+  
+    .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+      margin: 20px 5px;
+    }
+  
+    .swiper-pagination-bullet-active {
+      background: #FFFFFF;
+      opacity: 0.8!important;
+    }
+    .swiper-pagination-bullet {
+      background: #FFFFFF;
+      opacity: 0.5;
+    }
+  }
+  

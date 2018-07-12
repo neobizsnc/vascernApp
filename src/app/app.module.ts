@@ -1,12 +1,17 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 import { AboutPage } from '../pages/about/about';
+import { CreditsPage } from '../pages/credits/credits';
+import { TutorialPage } from '../pages/tutorial/tutorial';
+import { TutorialInactivePage } from '../pages/tutorial-inactive/tutorial-inactive';
+import { MembersPage } from '../pages/members/members';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
@@ -29,7 +34,11 @@ import { NativeStorage } from '@ionic-native/native-storage';
   declarations: [
     MyApp,
     AboutPage,
+    TutorialPage,
+    TutorialInactivePage,
+    CreditsPage,
     ContactPage,
+    MembersPage,
     HomePage,
     MenuPage,
     SearchPage,
@@ -48,14 +57,19 @@ import { NativeStorage } from '@ionic-native/native-storage';
       scrollPadding: false,
             scrollAssist: false, 
             autoFocusAssist: false
-    })
+    }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
+    CreditsPage,
+    TutorialPage,
+    TutorialInactivePage,
     ContactPage,
     HomePage,
+    MembersPage,
     MenuPage,
     SearchPage,
     FavouritePage,
