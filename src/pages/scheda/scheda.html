@@ -58,14 +58,20 @@
                     <span (click)="email()">{{c.email}}</span>
                   </div>
                   <div class="email-phone" *ngFor="let c of structure.centerPhone; let i = index">
-                      <strong>{{c.label}}</strong>
-                      <span (click)="call(c.phone)">{{c.phone}}</span>
-                    </div>
+                    <strong>{{c.label}}</strong>
+                    <span (click)="call(c.phone)">{{c.phone}}</span>
+                  </div>
+                  <div>
+                    <span (click)="call(structure.phone)">{{structure.phone}}</span>
+                  </div>
+                  <div>
+                    <span (click)="email(structure.email)">{{structure.email}}</span>
+                  </div>
               </div>
               <div *ngIf="child.name=='TARGET DISEASES'">
                   <div>
-                    <ul>
-                      <li *ngFor="let c of structure.diseaseCenter; let i = index">{{c.disease.name}}</li>
+                    <ul> 
+                      <li *ngFor="let c of structure.disease; let i = index">{{c.disease.name}}</li>
                     </ul> 
                   </div>
               </div>
@@ -80,10 +86,13 @@
                     <strong>Other specialist evaluations offered OUTSIDE the HCP</strong>
                     <div [innerHTML]="structure.otherSpecialistOutside"></div>
                   </div>
-                  
+                  <div  *ngIf="structure.service">
+                    <div [innerHTML]="structure.service"></div>
+                  </div>
               </div>
               <div  *ngIf="child.name=='OPENING HOURS'">
                   <div class="opening-time">
+                      <div [innerHTML]="structure.openingTime"></div>
                       <div [innerHTML]="structure.openingTime"></div>
                   </div>
               </div>
@@ -94,12 +103,12 @@
   </ion-list>
   
   <div class="action-button">
-      <button ion-button icon-start (click)="call(3441176641)" >
+      <button ion-button icon-start (click)="call(structure.phoneDirect)" >
         <ion-icon name="md-call"></ion-icon>
         Call now
       </button>
         
-      <button (click)="email()" ion-button icon-start>
+      <button (click)="email(structure.emailDirect)" ion-button icon-start>
         <ion-icon name="md-mail"></ion-icon>
         Send Email
       </button>

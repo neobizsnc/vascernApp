@@ -17,7 +17,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 @Component({
   selector: 'page-scheda',
   templateUrl: 'scheda.html',
-})
+}) 
 export class SchedaPage {
 
   information: any[]; 
@@ -83,13 +83,13 @@ export class SchedaPage {
     this.callNumber.callNumber(number, false);
   }
 
-  email() {
+  email(em) {
     let email = {
-      to: 'max@mustermann.de',
-      cc: 'erika@mustermann.de',
-      bcc: ['john@doe.com', 'jane@doe.com'],
-      subject: 'Cordova Icons',
-      body: 'How are you? Nice greetings from Leipzig',
+      to: em,
+      //cc: 'erika@mustermann.de',
+      //bcc: ['john@doe.com', 'jane@doe.com'],
+      subject: 'Info',
+      body: 'Info',
       isHtml: true
     };
     this.emailComposer.open(email);

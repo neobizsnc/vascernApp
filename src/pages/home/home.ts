@@ -3,6 +3,7 @@ import { NavController, Slides, Keyboard, Platform, NavParams, ModalController }
 import { SchedaPage } from '../scheda/scheda';
 import { CallNumber } from '@ionic-native/call-number';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';import { Http } from '@angular/http';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {
@@ -20,14 +21,16 @@ declare var google : any;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [GoogleMaps]
+  providers: [GoogleMaps] 
 })
 
 export class HomePage {
 
-  map: GoogleMap;
+  map: GoogleMap; 
   mapReady: boolean = false;
   structures:any[];
+  structuresAss:any[];
+  structuresAssCenter:any[] = [];
   autocomplete: any;
   GoogleAutocomplete: any;
   geocoder: any
@@ -36,6 +39,7 @@ export class HomePage {
   lng: any;
   height: any;
   cordinateFromSearch: LatLng;
+  id: any;
   
   @ViewChild(Slides) slides: Slides;
   @ViewChild('header') header: ElementRef;
@@ -112,8 +116,9 @@ export class HomePage {
       }
     })
   } 
-
+ 
   ionViewDidLoad() {
+    this.id = this.navParams.get('id');
     this.loadStructure(this.navParams.get('id'));
   }
 
@@ -122,10 +127,47 @@ export class HomePage {
       this.map = this.googleMaps.create('map_canvas');
       this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
         this.mapReady = true;
-        this.structures = data;
-        console.log(data);
+
+
+
+
+
+        //this.structures = data.diseaseCenter;
+        //this.structuresAss = data.diseaseAssociation;
+
+        data.diseaseCenter.forEach((val) => {
+          this.structuresAssCenter.push(val.hcpCenter)
+        });
+
+        data.diseaseAssociation.forEach((val) => {
+          this.structuresAssCenter.push(val.association)
+        }); 
+
         this.slides.update();
-        data.forEach((val, index) => {
+
+
+        this.structuresAssCenter.forEach((val, index) => {
+          let marker: Marker = this.map.addMarkerSync({
+            title: val.name,
+            snippet: val.name,
+            position: { lat: val.lat, lng: val.lng }
+          });
+          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+            this.slides.slideTo(index, 500);
+          })
+        });
+
+
+
+
+
+
+
+
+
+
+        
+        /*data.diseaseCenter.forEach((val, index) => {
           let marker: Marker = this.map.addMarkerSync({
             title: val.hcpCenter.name,
             snippet: val.hcpCenter.name,
@@ -135,6 +177,16 @@ export class HomePage {
             this.slides.slideTo(index, 500);
           })
         });
+        data.diseaseAssociation.forEach((val, index) => {
+          let marker: Marker = this.map.addMarkerSync({
+            title: val.association.name,
+            snippet: val.association.name,
+            position: { lat: val.association.lat, lng: val.association.lng }
+          });
+          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+            this.slides.slideTo(index, 500);
+          })
+        });*/
         this.map.getMyLocation().then((location: MyLocation) => {
           let cameraOption: CameraPosition<any> = {
             target: location.latLng,
@@ -149,7 +201,12 @@ export class HomePage {
 
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    let location: LatLng = new LatLng(this.structures[currentIndex].lat, this.structures[currentIndex].lng);
+    let location:  LatLng;
+
+    location = new LatLng(this.structuresAssCenter[currentIndex].lat, this.structuresAssCenter[currentIndex].lng);
+
+    
+    
     let cameraOption: CameraPosition<any> = {
       target: location,
       zoom: 15,

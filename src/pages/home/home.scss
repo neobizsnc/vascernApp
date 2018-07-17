@@ -65,17 +65,38 @@ page-home {
       bottom: -60px;
     }
     ion-slide {
-      align-items: flex-start!important;
-      padding: 30px 60px!important;
-      justify-content: flex-start!important;
-      background: #3b7eb1;
-      background: -moz-linear-gradient(top, #3b7eb1 0%, #33a3b9 55%, #32aaba 100%);
-      background: -webkit-linear-gradient(top, #3b7eb1 0%,#33a3b9 55%,#32aaba 100%);
-      background: linear-gradient(to bottom, #3b7eb1 0%,#33a3b9 55%,#32aaba 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b7eb1', endColorstr='#32aaba',GradientType=0 );
-      -webkit-border-radius: 8px;
-      -moz-border-radius: 8px;
-      border-radius: 8px;
+      
+        align-items: initial!important;
+
+      .slideBG {
+        align-items: flex-start!important;
+        padding: 30px 60px!important;
+        justify-content: flex-start!important;
+        background: #3b7eb1;
+        background: -moz-linear-gradient(top, #3b7eb1 0%, #33a3b9 55%, #32aaba 100%);
+        background: -webkit-linear-gradient(top, #3b7eb1 0%,#33a3b9 55%,#32aaba 100%);
+        background: linear-gradient(to bottom, #3b7eb1 0%,#33a3b9 55%,#32aaba 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b7eb1', endColorstr='#32aaba',GradientType=0 );
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        height: 100%;
+      }
+
+      .slideBGA {
+        align-items: flex-start!important;
+        padding: 30px 60px!important;
+        justify-content: flex-start!important;
+        background: #f69127;
+        background: -moz-linear-gradient(top, #f69127 0%, #fb8612 50%, #ff7d00 100%);
+        background: -webkit-linear-gradient(top, #f69127 0%,#fb8612 50%,#ff7d00 100%);
+        background: linear-gradient(to bottom, #f69127 0%,#fb8612 50%,#ff7d00 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f69127', endColorstr='#ff7d00',GradientType=0 );
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        height: 100%;
+      }
       
       .slide-zoom {
           text-align: left;

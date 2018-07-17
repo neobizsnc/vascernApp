@@ -1,6 +1,6 @@
 <ion-header #header>
     <ion-navbar color="blue">
-      <ion-title>HCP & ASSOCIATION </ion-title>
+      <ion-title>HCP & ASSOCIATION</ion-title>
     </ion-navbar>
     <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Address, city or zip Code"></ion-searchbar>
     <div id="legend">
@@ -11,7 +11,7 @@
     </div>
 </ion-header>
     
-<ion-content no-padding>
+<ion-content no-padding no-bounce>
   <ion-list [hidden]="autocompleteItems.length == 0">
     <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
       {{ item.description }}
@@ -19,21 +19,22 @@
   </ion-list>
   <div id="map_canvas"  [ngStyle]="setStyles()">
     <ion-slides  (ionSlideDidChange)="slideChanged()">
-      <ion-slide class="slide" *ngFor="let structure of structures ">
-        <h1 class="center-name">{{ structure.hcpCenter.name }}</h1>
-        <p class="center-info">{{ structure.hcpCenter.address }}, {{ structure.hcpCenter.zipcode }} - {{ structure.hcpCenter.city }}</p>
-        <button ion-button icon-only (click)="call(3441176641)">
-          <ion-icon name="md-call"></ion-icon>
-        </button>
-        <button ion-button icon-only (click)="maps(structure.hcpCenter.address, structure.hcpCenter.zipcode, structure.hcpCenter.city, structure.hcpCenter.country)">
-          <ion-icon name="md-map"></ion-icon>
-        </button>
-        <button id="goto-scheda" (click)="goTo(structure.hcpCenter)" ion-button>
-          <ion-icon name="ios-add-circle-outline"></ion-icon>
-        </button>
-        <!--<button id="favourite" ion-button>
-          <ion-icon name="ios-star-outline"></ion-icon>
-        </button>-->
+      <ion-slide class="slide" *ngFor="let structure of structuresAssCenter ">
+        <div [ngClass]="{'slideBG': structure.type != 'association', 'slideBGA': structure.type == 'association'} ">
+          <h1 class="center-name">{{ structure.name | truncate:20 }}</h1>
+          <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>
+          <button ion-button icon-only (click)="call(structure.phoneDirect)">
+            <ion-icon name="md-call"></ion-icon>
+          </button>
+          <button ion-button icon-only (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)">
+            <ion-icon name="md-map"></ion-icon>
+          </button>
+          <button id="goto-scheda" (click)="goTo(structure)" ion-button>
+            <ion-icon name="ios-add-circle-outline"></ion-icon>
+          </button> 
+        </div>
+        
+
       </ion-slide>
     </ion-slides>
   </div>

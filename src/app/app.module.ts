@@ -27,6 +27,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SearchPipe } from '../pipes/search/search';
 import { SortPipe } from '../pipes/sort/sort';
+import { TruncatePipe } from '../pipes/truncate/truncate';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
 
@@ -47,7 +48,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
     SchedaPage,
     TabsPage,
     SearchPipe,
-    SortPipe
+    SortPipe,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
