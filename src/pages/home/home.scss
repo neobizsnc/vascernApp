@@ -6,15 +6,16 @@ page-home {
     }
 
     .searchbar {
-      padding: 20px 60px;
+      padding: 20px 55px;
       background: #fff;
       .searchbar-search-icon {
         top: 19px;
       }
       .searchbar-input {
-        padding: 15px 28px;
+        padding: 15px 40px;
         height: auto;
         border: 1px solid #3981B1;
+        font-size: 14px;
       }
     }
 
@@ -70,7 +71,7 @@ page-home {
 
       .slideBG {
         align-items: flex-start!important;
-        padding: 30px 60px!important;
+        padding: 30px 55px!important;
         justify-content: flex-start!important;
         background: #3b7eb1;
         background: -moz-linear-gradient(top, #3b7eb1 0%, #33a3b9 55%, #32aaba 100%);
@@ -85,7 +86,7 @@ page-home {
 
       .slideBGA {
         align-items: flex-start!important;
-        padding: 30px 60px!important;
+        padding: 30px 55px!important;
         justify-content: flex-start!important;
         background: #f69127;
         background: -moz-linear-gradient(top, #f69127 0%, #fb8612 50%, #ff7d00 100%);
@@ -131,6 +132,7 @@ page-home {
         height: auto !important;
         padding: 10px 20px;
         background: transparent;
+        box-shadow: none!important;
         color: #e1e1e1;
       }
       #favourite {

@@ -18,6 +18,7 @@ import { MenuPage } from '../pages/menu/menu';
 import { SearchPage } from '../pages/search/search';
 import { FavouritePage } from '../pages/favourite/favourite';
 import { SchedaPage } from '../pages/scheda/scheda';
+import { RelatedPage } from '../pages/related/related';
 import { SearchResultPage } from '../pages/search-result/search-result';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HTTP } from '@ionic-native/http';
@@ -44,6 +45,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     MenuPage,
     SearchPage,
     FavouritePage,
+    RelatedPage,
     SearchResultPage,
     SchedaPage,
     TabsPage,
@@ -74,6 +76,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     MembersPage,
     MenuPage,
     SearchPage,
+    RelatedPage,
     FavouritePage,
     SearchResultPage,
     SchedaPage,

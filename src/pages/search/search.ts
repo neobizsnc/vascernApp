@@ -45,7 +45,7 @@ export class SearchPage {
     this.http.get('http://vascernapi.azurewebsites.net/api/diseaseApi').map(res => res.json()).subscribe(data => {
       this.structures = data;
       this.loading.dismiss();
-    });
+    }); 
   }
 
   goTo(name, orphaCode, website, id) {

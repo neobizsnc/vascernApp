@@ -13,13 +13,13 @@ import {
   CameraPosition,
   LatLng,
   Marker,
-  MyLocation,
+  MyLocation
 } from '@ionic-native/google-maps';
 
-declare var google : any;
+declare var google: any; 
 
 @Component({
-  selector: 'page-home',
+  selector: 'page-home', 
   templateUrl: 'home.html',
   providers: [GoogleMaps] 
 })
@@ -37,27 +37,28 @@ export class HomePage {
   autocompleteItems: any;
   lat: any;
   lng: any;
-  height: any;
+  height: any; 
   cordinateFromSearch: LatLng;
   id: any;
+  google: any;
   
   @ViewChild(Slides) slides: Slides;
   @ViewChild('header') header: ElementRef;
 
   constructor(private callNumber: CallNumber, private launchNavigator: LaunchNavigator, public modalCtrl: ModalController, public navParams: NavParams, public platform: Platform, public navCtrl: NavController, private googleMaps: GoogleMaps,  public http: Http, public zone: NgZone, public keyboard: Keyboard) {
-    this.geocoder = new google.maps.Geocoder;
-    this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = {
       input: ''
     };
     this.autocompleteItems = [];
-    platform.ready().then((readySource) => {
+    platform.ready().then((readySource) => { 
+      this.geocoder = new google.maps.Geocoder;
       this.height = platform.height();
     });
     keyboard.hideFormAccessoryBar(true);
   }
 
   ngAfterViewInit() {
+
     this.slides.spaceBetween = 10;
     this.slides.slidesPerView = 1
 
@@ -84,22 +85,16 @@ export class HomePage {
     if (this.autocomplete.input == '') {
       this.autocompleteItems = [];
       return;
-    }
-    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
-      (predictions, status) => {
-        this.autocompleteItems = [];
-        if(predictions){ 
-          this.zone.run(() => {
-            predictions.forEach((prediction) => {
-              this.autocompleteItems.push(prediction);
-            });
-          });
-        }
+    }  
+    this.http.get('http://vascernapi.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyDYA3JCpAXg24EbIl09thx4vq3nIppHOWk').map(res => res.json()).subscribe(data => {
+      this.autocompleteItems = [];
+      this.autocompleteItems.push(data[0]);
     });
   }
 
   selectSearchResult(item){
     this.autocompleteItems = [];
+    this.autocomplete.input == '';
     this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {
       if(status === 'OK' && results[0]){
         this.lat = results[0].geometry.location.lat();
@@ -128,13 +123,6 @@ export class HomePage {
       this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
         this.mapReady = true;
 
-
-
-
-
-        //this.structures = data.diseaseCenter;
-        //this.structuresAss = data.diseaseAssociation;
-
         data.diseaseCenter.forEach((val) => {
           this.structuresAssCenter.push(val.hcpCenter)
         });
@@ -145,11 +133,15 @@ export class HomePage {
 
         this.slides.update();
 
-
         this.structuresAssCenter.forEach((val, index) => {
+          let ico:any;
+          if(val.type == "association") {
+            ico = 'assets/imgs/association.png'
+          } else {
+            ico = 'assets/imgs/hcp.png'
+          }
           let marker: Marker = this.map.addMarkerSync({
-            title: val.name,
-            snippet: val.name,
+            icon: {  url : ico },
             position: { lat: val.lat, lng: val.lng }
           });
           marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
@@ -157,36 +149,6 @@ export class HomePage {
           })
         });
 
-
-
-
-
-
-
-
-
-
-        
-        /*data.diseaseCenter.forEach((val, index) => {
-          let marker: Marker = this.map.addMarkerSync({
-            title: val.hcpCenter.name,
-            snippet: val.hcpCenter.name,
-            position: { lat: val.hcpCenter.lat, lng: val.hcpCenter.lng }
-          });
-          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-            this.slides.slideTo(index, 500);
-          })
-        });
-        data.diseaseAssociation.forEach((val, index) => {
-          let marker: Marker = this.map.addMarkerSync({
-            title: val.association.name,
-            snippet: val.association.name,
-            position: { lat: val.association.lat, lng: val.association.lng }
-          });
-          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-            this.slides.slideTo(index, 500);
-          })
-        });*/
         this.map.getMyLocation().then((location: MyLocation) => {
           let cameraOption: CameraPosition<any> = {
             target: location.latLng,
@@ -201,12 +163,7 @@ export class HomePage {
 
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    let location:  LatLng;
-
-    location = new LatLng(this.structuresAssCenter[currentIndex].lat, this.structuresAssCenter[currentIndex].lng);
-
-    
-    
+    let location = new LatLng(this.structuresAssCenter[currentIndex].lat, this.structuresAssCenter[currentIndex].lng);
     let cameraOption: CameraPosition<any> = {
       target: location,
       zoom: 15,
@@ -216,7 +173,6 @@ export class HomePage {
   }
 
   goTo(structure) {
-    console.log(structure)
     let profileModal = this.modalCtrl.create(SchedaPage, { structure: structure });
      profileModal.present();
   }

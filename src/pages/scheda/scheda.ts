@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { RelatedPage } from '../related/related';
 /**
  * Generated class for the SchedaPage page.
  *
@@ -24,12 +25,22 @@ export class SchedaPage {
   structure: any;
   favourite: any[] = [];
   isFavourite: boolean;
+  diseaseHcp: any[];
+  diseaseAssociation: any[];
+  operatingSystem: any;
 
-  constructor(public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
+  constructor(public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
     let localData = http.get('assets/structure.json').map(res => res.json().items);
     localData.subscribe(data => {
       this.information = data;
     })
+    platform.ready().then((readySource) => { 
+      if(platform.is('ios')) {
+        this.operatingSystem = "ios";
+      } else {
+        this.operatingSystem = "android";
+      }
+    });
     this.structure = this.navParams.get('structure');
     this.getStorage();
   }
@@ -76,12 +87,24 @@ export class SchedaPage {
 
   ionViewDidLoad() {
     this.structure = this.navParams.get('structure')
-    console.log('ionViewDidLoad SchedaPage');
+    this.getDisease()
+  }
+
+  getDisease() {
+    if(this.structure.type != "association") {
+      this.http.get('http://vascernapi.azurewebsites.net/api/diseaseapi/GetDiseaseHcpByCenterId/' + this.structure.id).map(res => res.json()).subscribe(data => {
+        this.diseaseHcp = data;
+      });
+    } else {
+      this.http.get('http://vascernapi.azurewebsites.net/api/diseaseapi/GetDiseaseAssociationByCenterId/' + this.structure.id).map(res => res.json()).subscribe(data => {
+        this.diseaseHcp = data;
+      });
+    }
   }
 
   call(number) {
     this.callNumber.callNumber(number, false);
-  }
+  } 
 
   email(em) {
     let email = {
@@ -123,6 +146,13 @@ export class SchedaPage {
       this.isFavourite = true; 
     }
     this.setStorage();
+  }
+
+  goToRelated() {
+    this.navCtrl.push(RelatedPage, {
+      id: this.structure.id,
+      type: this.structure.type
+    });
   }
 
 }

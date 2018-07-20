@@ -16,7 +16,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
-  <script src="cordova.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDYA3JCpAXg24EbIl09thx4vq3nIppHOWk&libraries=places"></script>
+  <script src="cordova.js"></script> 
+  
 
   <!-- un-comment this code to enable service worker
   <script>
@@ -25,17 +27,17 @@
         .then(() => console.log('service worker installed'))
         .catch(err => console.error('Error', err));
     }
-  </script>-->
+  </script>--> 
 
   <link href="build/main.css" rel="stylesheet">
 
 </head>
-<body>
+<body> 
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYA3JCpAXg24EbIl09thx4vq3nIppHOWk&v=3.exp&libraries=places"></script>
+ 
+  
 
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>

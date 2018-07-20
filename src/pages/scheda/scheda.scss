@@ -1,13 +1,29 @@
 page-scheda {
-    ion-content {
+
+    .hcp-color {
         background: #3b7ab0;
-        background: -moz-linear-gradient(top, #3b7ab0 0%, #3697b6 28%, #ffffff 59%);
-        background: -webkit-linear-gradient(top, #3b7ab0 0%,#3697b6 28%,#ffffff 59%);
-        background: linear-gradient(to bottom, #3b7ab0 0%,#3697b6 28%,#ffffff 59%);
+        background: -moz-linear-gradient(top, #3b7ab0 0%, #3697b6 28%, #ffffff 55%);
+        background: -webkit-linear-gradient(top, #3b7ab0 0%,#3697b6 28%,#ffffff 55%);
+        background: linear-gradient(to bottom, #3b7ab0 0%,#3697b6 28%,#ffffff 55%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b7ab0', endColorstr='#ffffff',GradientType=0 );
+    }
+
+    .ass-color {
+        background: #f69127;
+        background: -moz-linear-gradient(top, #f69127 0%, #fb8612 28%, #ffffff 52%);
+        background: -webkit-linear-gradient(top, #f69127 0%,#fb8612 28%,#ffffff 52%);
+        background: linear-gradient(to bottom, #f69127 0%,#fb8612 28%,#ffffff 52%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f69127', endColorstr='#ffffff',GradientType=0 );
+    }
+
+    .ios {
         .scroll-content {
             top: 40px!important;
         }
+    }
+
+    ion-content {
+        
         .email-phone {
             strong {
                 display: block;
@@ -44,8 +60,14 @@ page-scheda {
         .bg0 {
             background: #a7dde2;
         }
+        .bg00 {
+            background: #FBD4AC;
+        }
         .bg1 {
             background: #dff2f4;
+        }
+        .bg11 {
+            background: #FDEEDE;
         }
         .bgInternal0 {
             background: #a7dce1;
@@ -59,6 +81,20 @@ page-scheda {
             background: -moz-linear-gradient(top, #dcf1f3 0%, #ffffff 100%);
             background: -webkit-linear-gradient(top, #dcf1f3 0%,#ffffff 100%);
             background: linear-gradient(to bottom, #dcf1f3 0%,#ffffff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcf1f3', endColorstr='#ffffff',GradientType=0 );
+        }
+        .bgInternal00 {
+            background: #FBD4AC;
+            background: -moz-linear-gradient(top, #FBD4AC 0%, #FDEEDE 100%);
+            background: -webkit-linear-gradient(top, #FBD4AC 0%,#FDEEDE 100%);
+            background: linear-gradient(to bottom, #FBD4AC 0%,#FDEEDE 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FBD4AC', endColorstr='#FDEEDE',GradientType=0 );
+        }
+        .bgInternal11 {
+            background: #FDEEDE;
+            background: -moz-linear-gradient(top, #FDEEDE 0%, #ffffff 100%);
+            background: -webkit-linear-gradient(top, #FDEEDE 0%,#ffffff 100%);
+            background: linear-gradient(to bottom, #FDEEDE 0%,#ffffff 100%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcf1f3', endColorstr='#ffffff',GradientType=0 );
         }
         .list-header {
