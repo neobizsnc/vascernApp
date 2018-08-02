@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="21px" viewBox="0 0 13 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>directionswalk</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="directionwalk_blu" transform="translate(-420.000000, -1141.000000)" fill="#3982B2" fill-rule="nonzero">
+            <g id="Direction_btn" transform="translate(420.000000, 1141.000000)">
+                <g id="Group" transform="translate(0.495638, 0.392284)">
+                    <g id="directionswalk">
+                        <path d="M7.3846154,3.30275229 C8.3076923,3.30275229 9.04615385,2.56880734 9.04615385,1.65137614 C9.04615385,0.733944955 8.3076923,0 7.3846154,0 C6.46153845,0 5.7230769,0.733944955 5.7230769,1.65137614 C5.7230769,2.56880734 6.46153845,3.30275229 7.3846154,3.30275229 Z M7.4769231,8.9908257 L12,8.9908257 L12,7.33944955 L8.6769231,7.33944955 L6.83076925,4.31192661 C6.55384615,3.85321101 6,3.48623853 5.44615385,3.48623853 C5.26153845,3.48623853 5.16923075,3.48623853 4.98461538,3.57798165 L0,5.1376147 L0,9.9082569 L1.66153846,9.9082569 L1.66153846,6.51376145 L3.6,5.87155965 L0,20 L1.66153846,20 L4.33846154,12.5688074 L6.46153845,15.4128441 L6.46153845,20 L8.1230769,20 L8.1230769,14.1284404 L5.8153846,10 L6.46153845,7.33944955 L7.4769231,8.9908257 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="69px" height="69px" viewBox="0 0 69 69" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Close_button</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Close_button_card" transform="translate(-644.000000, -86.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Close_button" transform="translate(644.000000, 86.000000)">
+                <circle id="Oval" opacity="0.5" cx="34.5" cy="34.5" r="34.5"></circle>
+                <g id="Close_card" transform="translate(6.000000, 6.000000)">
+                    <polygon id="add-contact" transform="translate(27.885901, 27.885901) rotate(135.000000) translate(-27.885901, -27.885901) " points="26.093327 29.200455 8.1675908 29.200455 8.1675908 26.571347 26.093327 26.571347 26.093327 8.16759113 28.7821874 8.16759113 28.7821874 26.571347 47.6042105 26.571347 47.6042105 29.200455 28.7821874 29.200455 28.7821874 47.6042109 26.093327 47.6042109"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

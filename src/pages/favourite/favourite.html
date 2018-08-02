@@ -7,42 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Favourite</ion-title>
+    <ion-title>FAVOURITE</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content no-padding>
-    <div id="container">
+<ion-content padding no-bounce>
     <ion-slides>
-      <ion-slide class="slide" *ngFor="let structure of structures ">
-        <h1 class="center-name">{{ structure.name }}</h1>
+      <ion-slide class="slide" *ngFor="let structure of structures">
+        <h1 class="center-name"><strong>{{ structure.name | truncate:20 }}</strong></h1>
         <p class="center-info">{{ structure.deparment | truncate:20 }}</p>
         <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>
         <p class="center-info">{{ structure.country }}</p>
         <div class="action-button">
-            <button ion-button icon-start (click)="call(3441176641)" >
-              <ion-icon name="md-call"></ion-icon>
-              Call now
-            </button>
-            <button (click)="email()" ion-button icon-start>
-              <ion-icon name="md-mail"></ion-icon>
-              Send Email
-            </button>
-            <button (click)="maps()" ion-button icon-start>
-              <ion-icon name="md-walk"></ion-icon>
-              Directions
-            </button>
+          <button ion-button icon-start (click)="call(structure.phoneDirect)" >
+            <ion-icon name="md-call"></ion-icon>
+            Call now
+          </button>
+          <button (click)="email(structure.emailDirect)"ion-button icon-start>
+            <ion-icon name="md-mail"></ion-icon>
+            Send Email
+          </button>
+          <button class="direction" (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)" ion-button icon-start>
+            <ion-icon name="md-walk"></ion-icon>
+            Directions
+          </button>
         </div>
-        <button id="delete-favorite" (click)="deleteFavourite(structure.id)" ion-button>
-          <ion-icon name="ios-trash-outline"></ion-icon>
-        </button>
-        <button id="goto-scheda" (click)="goTo()" ion-button>
+        <button id="goto-scheda" (click)="goTo(structure)" ion-button>
           <ion-icon name="ios-add-circle-outline"></ion-icon>
         </button>
-        
+        <button (click)="deleteFavourite(structure.id)" id="favourite" ion-button>
+          <ion-icon name="star"></ion-icon>
+        </button> 
       </ion-slide>
     </ion-slides>
-    </div>
 </ion-content>

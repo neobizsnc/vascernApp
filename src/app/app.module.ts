@@ -59,8 +59,9 @@ import { NativeStorage } from '@ionic-native/native-storage';
     IonicModule.forRoot(MyApp,{
       // These options are available in ionic-angular@2.0.0-beta.2 and up.
       scrollPadding: false,
-            scrollAssist: false, 
-            autoFocusAssist: false
+      scrollAssist: false, 
+      autoFocusAssist: false,
+      swipeBackEnabled: false
     }),
     IonicStorageModule.forRoot()
   ],

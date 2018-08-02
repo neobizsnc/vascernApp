@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { SchedaPage } from '../scheda/scheda';
 import 'rxjs/add/operator/map';
@@ -23,11 +23,18 @@ export class RelatedPage {
   loading: any;
   id: any;
   type: any;
+  os: string;
 
-  constructor(public modalCtrl: ModalController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+  constructor(public plt: Platform, public modalCtrl: ModalController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
+    if (this.plt.is('ios')) {
+      // This will only print when on iOS
+      this.os = "ios";
+    } else {
+      this.os = "android";
+    }
     this.loading.present();
     this.id = this.navParams.get('id');
     this.type = this.navParams.get('type');
@@ -35,6 +42,7 @@ export class RelatedPage {
 
   ionViewDidLoad() {
     if(this.type == "association") {
+
       this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetRelatedHcp/' + this.id).map(res => res.json()).subscribe(data => {
         this.structuresHcp = data
         this.loading.dismiss();

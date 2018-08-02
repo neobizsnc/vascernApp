@@ -23,7 +23,9 @@ export class SearchPage {
   descending: boolean = false;
   order: number;
   column: string = 'name';
-  loading: any;
+  loading: any; 
+  az: boolean = true;
+  last: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
@@ -39,11 +41,21 @@ export class SearchPage {
   sort(){
     this.descending = !this.descending;
     this.order = this.descending ? 1 : -1;
+    this.last = false;
+    this.az = true;
+  }
+
+  lastSearch(){
+    this.descending = !this.descending;
+    this.order = this.descending ? 1 : -1;
+    this.last = true;
+    this.az = false;
   }
 
   loadStructure() {
     this.http.get('http://vascernapi.azurewebsites.net/api/diseaseApi').map(res => res.json()).subscribe(data => {
       this.structures = data;
+      this.sort();
       this.loading.dismiss();
     }); 
   }

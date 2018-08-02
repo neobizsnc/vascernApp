@@ -1,4 +1,8 @@
 page-about {
+    ion-content {
+        background: url(../assets/imgs/ern-logo_sfondo.png) no-repeat center center;
+        background-size: contain;
+    }
     .about-img {
         text-align: center;
         img {
@@ -6,9 +10,9 @@ page-about {
         }
     }
     .info {
-        padding: 30px 40px 20px 40px;
+        padding: 30px 0 20px 0;
         p {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 26px;
             color: #01587B;
             margin-bottom: 5px;
@@ -17,14 +21,14 @@ page-about {
         }
     }
     .social {
-        padding: 30px 40px 20px 40px;
-        span {
-            font-size: 16px;
+        padding: 30px 0 20px 0;
+        button {
+            padding: 5px 10px!important;
+            border: 1px solid #01587B;
+            background: transparent;
             color: #01587B;
-            margin-bottom: 5px;
-            margin-top: 5px;
-            font-weight: bold;
-            margin-right: 5px;
+            border-radius: 5px;
+            font-size: 14px;
         }
     }
 }

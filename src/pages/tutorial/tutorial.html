@@ -10,39 +10,35 @@
         <ion-slide>
           <ion-row>
               <ion-col>
-                  <p>It’s simple! <br/> Search for the <br/> rare disease</p>
+                  <p><strong>It’s simple! <br/> Search for the <br/> rare disease</strong></p>
                   <img src="assets/imgs/tutorial1.png" />
+                  <div class="btn-ctn">
+                    <button class="skip btnAction" ion-button color="light" (click)="goToHome()">SKYP</button>
+                    <button class="btnAction" ion-button color="light" (click)="goNext()">OK</button> 
+                  </div>
               </ion-col>
             </ion-row>
-          <ion-row>
-            <ion-col>
-              <button ion-button color="light" (click)="goToHome()">SKYP</button>
-            </ion-col>
-          </ion-row>
         </ion-slide>
         <ion-slide>
           <ion-row>
               <ion-col>
-                <p>See the <br/> structures <br/> nearby</p>
+                <p><strong>See the <br/> structures <br/> nearby</strong></p>
                 <img src="assets/imgs/tutorial2.png" />
-              </ion-col>
+                <div class="btn-ctn">
+                  <button class="btnAction skip" ion-button color="light" (click)="goToHome()">SKYP</button>
+                  <button class="btnAction" ion-button color="light" (click)="goNext()">OK</button>
+                </div>
+              </ion-col> 
             </ion-row>
-          <ion-row>
-            <ion-col>
-              <button ion-button color="light" (click)="goToHome()">SKYP</button>
-            </ion-col>
-          </ion-row>
         </ion-slide>
         <ion-slide>
           <ion-row>
             <ion-col>
-                <p>Get all the  <br/> information you <br/> want</p>
+                <p><strong>Get all the  <br/> information you <br/> want</strong></p>
                 <img src="assets/imgs/tutorial3.png" />
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <button ion-button color="light" (click)="goToHome()">OK</button>
+                <div class="btn-ctn">
+                  <button class="btnAction" ion-button color="light" (click)="goToHome()">OK</button>
+                </div>
             </ion-col>
           </ion-row>
         </ion-slide>

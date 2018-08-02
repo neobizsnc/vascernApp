@@ -6,24 +6,37 @@
 -->
 
 <ion-content [ngClass]="{'hcp-color': structure.type != 'association', 'ass-color': structure.type == 'association', 'ios': operatingSystem == 'ios', 'android': operatingSystem == 'android' }">
+  
+
+
+  <ion-fab [ngClass]="{'ios-top': operatingSystem=='ios', 'android-top': operatingSystem=='android'}" top right edge (click)="close()">
+    <button ion-fab><img src="assets/imgs/Close_button_card.svg"/></button>
+  </ion-fab>
+  
   <div id="information">
     <button (click)="addRemoveFavourite(structure.id)" id="favourite" class="icon-scheda" ion-button icon-only>
       <ion-icon *ngIf="isFavourite" name="star"></ion-icon>
       <ion-icon *ngIf="!isFavourite" name="star-outline"></ion-icon>
     </button>
-    <button (click)="close()" id="close" class="icon-scheda" ion-button icon-only>
-      <ion-icon name="md-close"></ion-icon>
-    </button>
-    <h1>{{structure.name}}</h1>
+    
+    <h1><strong>{{structure.name}}</strong></h1>
     <p>{{structure.deparment}}</p>
     <p>{{structure.address}}, {{structure.zipcode}}, {{structure.city}}</p>
     <p>{{structure.country}}</p>
 
     <div class="social">
-      <span *ngIf="structure.facebook" (click)="openBrowser(structure.facebook)">Facebook</span>
-      <span *ngIf="structure.youtube" (click)="openBrowser(structure.youtube)">Youtube</span>
-      <span *ngIf="structure.twitter" (click)="openBrowser(structure.twitter)">Twitter</span>
-      <span *ngIf="structure.hcpWebsite" (click)="openBrowser(structure.hcpWebsite)">Web</span>
+      <button *ngIf="structure.facebook" ion-button icon-only (click)="openBrowser(structure.facebook)">
+          <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+      <button *ngIf="structure.twitter" ion-button icon-only (click)="openBrowser(structure.twitter)">
+          <ion-icon name="logo-twitter"></ion-icon>
+      </button>
+      <button *ngIf="structure.youtube" ion-button icon-only (click)="openBrowser(structure.youtube)">
+          <ion-icon name="logo-youtube"></ion-icon>
+      </button>
+      <button *ngIf="structure.hcpWebsite" ion-button icon-only (click)="openBrowser(structure.hcpWebsite)">
+          <ion-icon name="ios-link"></ion-icon>
+      </button>
     </div>
   </div>
   
@@ -32,16 +45,27 @@
     <!-- First Level -->
     <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
       <!-- Toggle Button -->
-      <button ion-item (click)="toggleSection(i)"  detail-none [ngClass]="{'section-active': item.open, 'section': !item.open, 'bg0': i==0 && structure.type != 'association', 'bg1': i==1 && structure.type != 'association', 'bg00': i==0 && structure.type == 'association', 'bg11': i==1 && structure.type == 'association' }">
+      <button ion-item (click)="toggleSection(i)"  detail-none [ngClass]="{'section-active': item.open, 'section': !item.open, 
+                                                                        'bgHcp0': i==0 && structure.type != 'association', 
+                                                                        'bgHcp1': i==1 && structure.type != 'association', 
+                                                                        'bgHcp2': i==2 && structure.type != 'association', 
+                                                                        'bgAss0': i==0 && structure.type == 'association', 
+                                                                        'bgAss1': i==1 && structure.type == 'association',
+                                                                        'bgAss2': i==2 && structure.type == 'association' }">
           <ion-icon class="blue-color" item-left name="ios-contact-outline" *ngIf="i==0"></ion-icon>
-          <ion-icon class="blue-color" item-left name="ios-alert-outline" *ngIf="i==1"></ion-icon>
-          <ion-icon class="blue-color" item-left name="ios-time-outline" *ngIf="i==2"></ion-icon>
+          <ion-icon class="blue-color" item-left name="ios-medkit-outline" *ngIf="i==1"></ion-icon>
+          <ion-icon class="blue-color" item-left name="ios-information-circle-outline" *ngIf="i==2"></ion-icon>
           <ion-icon class="blue-color" item-left name="ios-time-outline" *ngIf="i==3"></ion-icon>
-          {{ item.name }}
+          <strong>{{ item.name }}</strong>
           <ion-icon class="blue-color small-ico" item-right name="ios-arrow-down" *ngIf="!item.open"></ion-icon>
           <ion-icon class="blue-color small-ico" item-right name="ios-arrow-up" *ngIf="item.open"></ion-icon>
       </button>
-      <ion-list *ngIf="item.children && item.open" no-lines [ngClass]="{ 'bgInternal0': i==0 && structure.type != 'association', 'bgInternal1': i==1 && structure.type != 'association', 'bgInternal00': i==0 && structure.type == 'association', 'bgInternal11': i==1 && structure.type == 'association' }"> 
+      <ion-list *ngIf="item.children && item.open" no-lines [ngClass]="{ 'bgInternalHcp0': i==0 && structure.type != 'association', 
+                                                                         'bgInternalHcp1': i==1 && structure.type != 'association',
+                                                                         'bgInternalHcp2': i==2 && structure.type != 'association', 
+                                                                         'bgInternalAss0': i==0 && structure.type == 'association', 
+                                                                         'bgInternalAss1': i==1 && structure.type == 'association', 
+                                                                         'bgInternalAss2': i==2 && structure.type == 'association' }"> 
         <!-- Second Level -->
         <ion-list-header *ngFor="let child of item.children; let j = index" no-padding >
           <!-- Direct Add Button as Fallback -->
@@ -89,11 +113,11 @@
                     <div [innerHTML]="structure.service"></div>
                   </div>
                   <div  *ngIf="structure.type == 'association'">
-                    <button ion-button (click)="goToRelated(structure.id)" >
+                    <button class="related" ion-button (click)="goToRelated(structure.id)" >
                       See relatd hcp
                     </button>
                   </div>
-                  <div  *ngIf="structure.type != 'association'">
+                  <div class="related"  *ngIf="structure.type != 'association'">
                     <button ion-button (click)="goToRelated(structure.id)" >
                       See related association
                     </button>
@@ -121,7 +145,9 @@
         Send Email
       </button>
         
-      <button (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)" ion-button icon-start>
+      <button class="direction_blue" (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)" ion-button icon-start [ngClass]="{ 
+      'direction_blue': structure.type != 'association',
+      'direction_orange': structure.type == 'association' }">
         <ion-icon name="md-walk"></ion-icon>
         Directions
       </button>

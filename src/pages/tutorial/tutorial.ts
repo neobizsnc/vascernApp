@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, NavParams, Platform, Slides } from 'ionic-angular';
 import { TabsPage } from '../../pages/tabs/tabs';
 
 /**
@@ -15,8 +15,14 @@ import { TabsPage } from '../../pages/tabs/tabs';
 })
 export class TutorialPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild(Slides) slides: Slides;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public platform: Platform ) {
+
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TutorialPage');
@@ -24,6 +30,9 @@ export class TutorialPage {
 
   goToHome(){
     this.navCtrl.setRoot(TabsPage);
+  }
+  goNext(){
+    this.slides.slideNext(300)
   }
 
 }

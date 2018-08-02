@@ -7,13 +7,18 @@ page-tutorial-inactive {
     background: linear-gradient(to bottom, #31aebb 0%,#3599b6 50%,#3b7cb0 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31aebb', endColorstr='#3b7cb0',GradientType=0 );
     }
+
+    .slide-zoom, .row {
+      height: 100%;
+    }
   
     .swiper-slide {
       align-items: flex-start!important;
     }
   
     ion-slide img {
-      width: 70% !important;
+      height: calc(100% - 170px)!important;
+      width: auto!important;
     }
     
     ion-slide p {

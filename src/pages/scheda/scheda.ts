@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ViewController, Platform, AlertController, } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -29,7 +29,7 @@ export class SchedaPage {
   diseaseAssociation: any[];
   operatingSystem: any;
 
-  constructor(public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
+  constructor(private alertCtrl: AlertController, public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
     let localData = http.get('assets/structure.json').map(res => res.json().items);
     localData.subscribe(data => {
       this.information = data;
@@ -138,10 +138,22 @@ export class SchedaPage {
   addRemoveFavourite(id) {
     if(this.favourite.indexOf(id) !== -1) {
       //esite
+      let alert = this.alertCtrl.create({
+        title: 'Information',
+        subTitle: 'Tolto dai preferiti',
+        buttons: ['Ok']
+      });
+      alert.present();
       this.isFavourite = false;
       this.favourite.splice(this.favourite.indexOf(id), 1);
     } else {
       //non esiste
+      let alert = this.alertCtrl.create({
+        title: 'Information',
+        subTitle: 'Aggiunto ai preferiti',
+        buttons: ['Ok']
+      });
+      alert.present();
       this.favourite.push(id);
       this.isFavourite = true; 
     }

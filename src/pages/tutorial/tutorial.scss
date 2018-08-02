@@ -12,8 +12,28 @@ page-tutorial {
     align-items: flex-start!important;
   }
 
+  .btnAction {
+    width: 80px;
+  }
+
+  .skip {
+    background: transparent;
+    color: #FFFFFF!important;
+    border: 2px solid #ffffff;
+  }
+
+  .slide-zoom, .row {
+    height: 100%;
+  }
+
+
+  .btn-ctn {
+    width: 100%;
+  }
+
   ion-slide img {
-    width: 60% !important;
+    height: calc(100% - 270px)!important;
+    width: auto!important;
   }
   
   ion-slide p {

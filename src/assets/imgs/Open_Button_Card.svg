@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="open_button_card" transform="translate(-538.000000, -1002.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="open_button" transform="translate(538.000000, 1002.000000)">
+                <g id="Group">
+                    <circle id="Oval-3" opacity="0.5" cx="15" cy="15" r="15"></circle>
+                    <g id="Controls/Buttons/Dark---Add" transform="translate(7.094118, 6.352941)">
+                        <polygon id="Add" points="15.8272051 8.87867599 8.65808771 8.87867599 8.65808771 16.0477934 7.22426426 16.0477934 7.22426426 8.87867599 0.0551468824 8.87867599 0.0551468824 7.4448525 7.22426426 7.4448525 7.22426426 0.275735118 8.65808771 0.275735118 8.65808771 7.4448525 15.8272051 7.4448525"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

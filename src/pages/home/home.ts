@@ -3,20 +3,12 @@ import { NavController, Slides, Keyboard, Platform, NavParams, ModalController }
 import { SchedaPage } from '../scheda/scheda';
 import { CallNumber } from '@ionic-native/call-number';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';import { Http } from '@angular/http';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  CameraPosition,
-  LatLng,
-  Marker,
-  MyLocation
-} from '@ionic-native/google-maps';
+import { GoogleMaps, GoogleMap, LatLng, MyLocation } from '@ionic-native/google-maps';
 
-declare var google: any; 
+declare var LatLon: any;
+declare var google: any;
 
 @Component({
   selector: 'page-home', 
@@ -26,42 +18,43 @@ declare var google: any;
 
 export class HomePage {
 
-  map: GoogleMap; 
-  mapReady: boolean = false;
-  structures:any[];
-  structuresAss:any[];
+  map: GoogleMap;
+  newMap: any; 
   structuresAssCenter:any[] = [];
   autocomplete: any;
-  GoogleAutocomplete: any;
-  geocoder: any
   autocompleteItems: any;
   lat: any;
   lng: any;
   height: any; 
   cordinateFromSearch: LatLng;
-  id: any;
-  google: any;
-  
+  //google: any;
+  markers: any[] = [];
+
+  @ViewChild('mapcanvas') mapElement: ElementRef;
   @ViewChild(Slides) slides: Slides;
   @ViewChild('header') header: ElementRef;
 
-  constructor(private callNumber: CallNumber, private launchNavigator: LaunchNavigator, public modalCtrl: ModalController, public navParams: NavParams, public platform: Platform, public navCtrl: NavController, private googleMaps: GoogleMaps,  public http: Http, public zone: NgZone, public keyboard: Keyboard) {
+  constructor(private callNumber: CallNumber, 
+              private launchNavigator: LaunchNavigator, 
+              public modalCtrl: ModalController, 
+              public navParams: NavParams, 
+              public platform: Platform, 
+              public navCtrl: NavController, 
+              public http: Http, 
+              public zone: NgZone, public keyboard: Keyboard) {
     this.autocomplete = {
       input: ''
     };
     this.autocompleteItems = [];
     platform.ready().then((readySource) => { 
-      this.geocoder = new google.maps.Geocoder;
       this.height = platform.height();
     });
     keyboard.hideFormAccessoryBar(true);
   }
 
   ngAfterViewInit() {
-
     this.slides.spaceBetween = 10;
     this.slides.slidesPerView = 1
-
     if(this.platform.is('ios')) {
       //Iphone X
       if(this.height > 800) {
@@ -81,97 +74,156 @@ export class HomePage {
     return styles;
   }
 
+  centerLocation() {
+    this.map.getMyLocation().then((location: MyLocation) => {
+      this.newMap.setCenter(new google.maps.LatLng(location.latLng.lat, location.latLng.lng));
+      this.sortResults(location.latLng);
+      this.rePrintMarker();
+      this.slides.update();
+      this.slides.slideTo(0, 500);
+    })
+  }
+
   updateSearchResults(){
     if (this.autocomplete.input == '') {
       this.autocompleteItems = [];
       return;
-    }  
-    this.http.get('http://vascernapi.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyDYA3JCpAXg24EbIl09thx4vq3nIppHOWk').map(res => res.json()).subscribe(data => {
+    }
+    //AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k
+    this.http.get('http://vascernapi.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k').map(res => res.json()).subscribe(data => {
       this.autocompleteItems = [];
-      this.autocompleteItems.push(data[0]);
+      this.autocompleteItems.push(data[0]); 
     });
   }
 
+  //AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k
   selectSearchResult(item){
-    this.autocompleteItems = [];
-    this.autocomplete.input == '';
-    this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {
-      if(status === 'OK' && results[0]){
-        this.lat = results[0].geometry.location.lat();
-        this.lng = results[0].geometry.location.lng();
+    this.autocompleteItems = [];   
+    this.http.get('http://vascernapi.azurewebsites.net/Home/GetGeocode?Address=' + item.description + '&ApiKey=AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k').map(res => res.json()).subscribe(data => {
+      if(data.status === 'OK' && data.results[0]){
+        this.lat = data.results[0].geometry.location.lat;
+        this.lng = data.results[0].geometry.location.lng;
         this.keyboard.onClose(() => {
-          let location: LatLng = new LatLng(this.lat, this.lng);
-          let cameraOption: CameraPosition<any> = {
-            target: location,
-            zoom: 10,
-            tilt: 10
-          };
-          this.map.moveCamera(cameraOption);
+          let location = new google.maps.LatLng(this.lat, this.lng)
+          this.newMap.setCenter(location);
+          this.sortResults({lat: parseFloat(location.lat()), lng: parseFloat(location.lng())});
+          this.rePrintMarker();
+          this.slides.update();
+          this.slides.slideTo(0, 500);
+          this.autocomplete.input = '';
         });
       }
-    })
+    });
   } 
  
   ionViewDidLoad() {
-    this.id = this.navParams.get('id');
     this.loadStructure(this.navParams.get('id'));
   }
 
   loadStructure(id) {
     this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByDiseaseId/' + id).map(res => res.json()).subscribe(data => {
-      this.map = this.googleMaps.create('map_canvas');
-      this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-        this.mapReady = true;
-
-        data.diseaseCenter.forEach((val) => {
-          this.structuresAssCenter.push(val.hcpCenter)
-        });
-
-        data.diseaseAssociation.forEach((val) => {
-          this.structuresAssCenter.push(val.association)
-        }); 
-
-        this.slides.update();
-
-        this.structuresAssCenter.forEach((val, index) => {
-          let ico:any;
-          if(val.type == "association") {
-            ico = 'assets/imgs/association.png'
-          } else {
-            ico = 'assets/imgs/hcp.png'
-          }
-          let marker: Marker = this.map.addMarkerSync({
-            icon: {  url : ico },
-            position: { lat: val.lat, lng: val.lng }
-          });
-          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-            this.slides.slideTo(index, 500);
-          })
-        });
-
-        this.map.getMyLocation().then((location: MyLocation) => {
-          let cameraOption: CameraPosition<any> = {
-            target: location.latLng,
-            zoom: 15,
-            tilt: 10
-          };
-          this.map.moveCamera(cameraOption);
-        })
+      let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+ 
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      } 
+      this.newMap = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      data.diseaseCenter.forEach((val) => {
+        this.structuresAssCenter.push(val.hcpCenter)
       });
+      data.diseaseAssociation.forEach((val) => {
+        this.structuresAssCenter.push(val.association)
+      }); 
+      this.map = GoogleMaps.create('test');
+      this.map.getMyLocation().then((location: MyLocation) => {
+        this.newMap.setCenter(new google.maps.LatLng(location.latLng.lat, location.latLng.lng));
+        this.sortResults(location.latLng);
+        this.slides.update();
+        this.setMarker();
+      })
     });
   }
 
-  slideChanged() {
-    let currentIndex = this.slides.getActiveIndex();
-    let location = new LatLng(this.structuresAssCenter[currentIndex].lat, this.structuresAssCenter[currentIndex].lng);
-    let cameraOption: CameraPosition<any> = {
-      target: location,
-      zoom: 15,
-      tilt: 10
-    };
-    this.map.moveCamera(cameraOption);
+  setMarker() {
+    this.structuresAssCenter.forEach((val, index) => {
+      console.log(val)
+      let ico:any;
+      if(val.type == "association") {
+        ico = 'assets/imgs/GEO_ASSOCIATION_OFF.svg'
+      } else {
+        ico = 'assets/imgs/GEO_HCP_OFF.svg'
+      }
+      let marker = new google.maps.Marker({
+        position: {lat: parseFloat(val.lat), lng: parseFloat(val.lng)},
+        map: this.newMap,
+        icon: {  url : ico },
+        title: 'Hello World!'
+      });
+      marker.addListener('click', () => {
+        this.newMap.setZoom(8);
+        this.newMap.setCenter(marker.getPosition());
+        this.slides.slideTo(index, 500);
+      }); 
+      this.markers.push(marker);
+    });
   }
 
+  rePrintMarker() {
+    for (var i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(null);
+    }
+    this.markers = [];
+    this.setMarker();
+  }
+
+  sortResults(position) {
+    console.log(position)
+    var latlon = new LatLon(position.lat, position.lng);
+    var locationArray = Array.prototype.slice.call(this.structuresAssCenter, 0); 
+    locationArray.forEach(function(el){
+      var distA = latlon.distanceTo(new LatLon(Number(el.lat),Number(el.lng)));
+      el.distance = distA;
+    });
+    this.sortByKey(locationArray, "distance")
+    this.structuresAssCenter = locationArray
+  };
+
+  sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+  }
+ 
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    let location = new google.maps.LatLng(this.structuresAssCenter[currentIndex].lat, this.structuresAssCenter[currentIndex].lng)
+    
+    this.structuresAssCenter.forEach((val, index) => {
+      if(val.type == 'association') {
+        this.markers[index].icon.url = 'assets/imgs/GEO_ASSOCIATION_OFF.svg';
+      } else {
+        this.markers[index].icon.url = 'assets/imgs/GEO_HCP_OFF.svg';
+      }
+    })
+
+    console.log(this.markers[currentIndex])
+    
+    if(this.structuresAssCenter[currentIndex].type == 'association') {
+      this.markers[currentIndex].icon.url = 'assets/imgs/GEO_ASSOCIATION_ON.svg';
+      this.markers[currentIndex].icon.size.height = 44;
+      this.markers[currentIndex].icon.size.width = 35;
+    } else {
+      this.markers[currentIndex].icon.url = 'assets/imgs/GEO_HCP_ON.svg';
+      this.markers[currentIndex].icon.size.height = 44;
+      this.markers[currentIndex].icon.size.width = 35;
+    }
+
+    this.newMap.setCenter(location);
+  }
+ 
   goTo(structure) {
     let profileModal = this.modalCtrl.create(SchedaPage, { structure: structure });
      profileModal.present();

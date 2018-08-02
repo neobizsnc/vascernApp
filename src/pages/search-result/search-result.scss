@@ -1,6 +1,12 @@
 page-search-result {
+    ion-content {
+        background: url(../assets/imgs/ern-logo_sfondo.png) no-repeat center;
+        background-size: contain;
+    }
     .scroll-content {
         padding: 60px!important;
+        display: flex;
+        flex-direction: column;
     }
     h1 {
         text-transform: uppercase;
@@ -16,11 +22,15 @@ page-search-result {
         padding: 0 10px;
         font-size: 18px;
     }
+    p {
+            font-size: 18px;
+            color: #3982B2;
+            text-transform: uppercase;
+        }
     .ctn-call {
-        height: 90%;
-        display: flex;
-        align-content: flex-end;
-        flex-direction: column-reverse;
-
+        position: absolute;
+        bottom: 40px;
+        left: 10%;
+        width: 80%;
     }
 }

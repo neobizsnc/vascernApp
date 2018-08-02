@@ -1,5 +1,10 @@
 page-menu {
+    ion-content {
+        background: url(../assets/imgs/ern-logo_sfondo.png) no-repeat center center;
+        background-size: contain;
+    }
     .item {
+        background: transparent!important;
         padding-right: 16px;
         h2 {
             font-size: 20px;

@@ -2,40 +2,50 @@
     <ion-navbar color="blue">
       <ion-title>HCP & ASSOCIATION</ion-title>
     </ion-navbar>
-    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Address, city or zip Code"></ion-searchbar>
-    <div id="legend">
-      <img src="assets/imgs/hcp.png">
-      <span class="blue">HCP</span>
-      <img class="orange-img" src="assets/imgs/association.png">
-      <span class="orange">Association</span>
+    <div id="ctn-search">
+      <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Address, city or zip Code"></ion-searchbar>
+      <button id="center-location" (click)="centerLocation()" ion-button>
+        <img src="assets/imgs/center_map.svg">
+      </button> 
     </div>
+    
+    
 </ion-header>
     
 <ion-content no-padding no-bounce>
+
+
+
   <ion-list [hidden]="autocompleteItems.length == 0">
     <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
       {{ item.description }}
     </ion-item> 
   </ion-list>
-  <div id="map_canvas"  [ngStyle]="setStyles()">
-    <ion-slides  (ionSlideDidChange)="slideChanged()">
-      <ion-slide class="slide" *ngFor="let structure of structuresAssCenter ">
-        <div [ngClass]="{'slideBG': structure.type != 'association', 'slideBGA': structure.type == 'association'} ">
-          <h1 class="center-name">{{ structure.name | truncate:20 }}</h1>
-          <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>
-          <button ion-button icon-only (click)="call(structure.phoneDirect)">
-            <ion-icon name="md-call"></ion-icon>
-          </button>
-          <button ion-button icon-only (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)">
-            <ion-icon name="md-map"></ion-icon>
-          </button>
-          <button id="goto-scheda" (click)="goTo(structure)" ion-button>
-            <ion-icon name="ios-add-circle-outline"></ion-icon>
-          </button> 
-        </div>
-        
-
-      </ion-slide>
-    </ion-slides>
+  <div id="test" style="display: none"></div>
+  <div id="legend">
+      <img src="assets/imgs/GEO_HCP_OFF.svg">
+      <span class="blue">HCP</span>
+      <img class="orange-img" src="assets/imgs/GEO_ASSOCIATION_OFF.svg">
+      <span class="orange">Association</span>
+    </div>
+  <div id="map_canvas" #mapcanvas  [ngStyle]="setStyles()">
+    
   </div>
+  <ion-slides  (ionSlideDidChange)="slideChanged()">
+    <ion-slide class="slide" *ngFor="let structure of structuresAssCenter ">
+      <div [ngClass]="{'slideBG': structure.type != 'association', 'slideBGA': structure.type == 'association'} ">
+        <h1 class="center-name"><strong>{{ structure.name | truncate:20 }}</strong></h1>
+        <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>
+        <button class="btn-action" ion-button icon-only (click)="call(structure.phoneDirect)">
+          <ion-icon name="md-call"></ion-icon>
+        </button>
+        <button class="btn-white btn-action" ion-button icon-only (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)">
+          <ion-icon name="md-walk"></ion-icon>
+        </button>
+        <button id="goto-scheda" (click)="goTo(structure)" ion-button>
+          <img src="assets/imgs/Open_Button_Card.svg">
+        </button> 
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

@@ -5,22 +5,23 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="blue">
+  <ion-navbar>
     <ion-title>RARE DISEASE</ion-title>
   </ion-navbar>
   <ion-searchbar spellcheck="true" placeholder="TYPE HERE" [(ngModel)]="terms"></ion-searchbar>
+  <p class="info">Type the name of the <strong>rare <br/> disease</strong> or the <strong>Orpha Code</strong></p>
   <div id="btn-ctn">
-    <button ion-button type="button" (click)="sort()">Last Search</button>
-    <button ion-button type="button" (click)="sort()">A-Z List</button> 
+    <button [ngClass]="{'sortActive': last==false }" class="sort" ion-button type="button" (click)="lastSearch()">Last Search</button>
+    <button [ngClass]="{'sortActive': az==false }" class="sort" ion-button type="button" (click)="sort()">A-Z List</button> 
   </div>
 </ion-header>
-
-<ion-content padding>
+<ion-content>
+  
   <ion-list>
     <ion-item *ngFor="let c of structures | search : terms | sort: { property: column, order: order }; let i = index">
       <div (click)="goTo(c.name, c.orphacode, c.website, c.id)">
-          <h2>{{c.name}}</h2>
-          <p>{{c.orphacode}}</p>
+          <h2><strong>{{c.name}}</strong></h2>
+          <p>ORPHA NO. {{c.orphacode}}</p>
           <ion-icon name="ios-arrow-forward"></ion-icon>
       </div>
     </ion-item>

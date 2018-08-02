@@ -1,9 +1,33 @@
 page-related {
 
 
-    ion-header {
+    .android {
+        top: 0!important;
+
+    }
+    .ios {
         top: 50px!important;
-        background: #fff;
+
+    }
+
+    .hcp {
+        background: #a4cede;
+        background: -moz-linear-gradient(top, #a4cede 0%, #ffffff 100%);
+        background: -webkit-linear-gradient(top, #a4cede 0%,#ffffff 100%);
+        background: linear-gradient(to bottom, #a4cede 0%,#ffffff 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4cede', endColorstr='#ffffff',GradientType=0 );
+    }
+
+    .association {
+        background: #FEC68F;
+        background: -moz-linear-gradient(top, #FEC68F 0%, #ffffff 100%);
+        background: -webkit-linear-gradient(top, #FEC68F 0%,#ffffff 100%);
+        background: linear-gradient(to bottom, #FEC68F 0%,#ffffff 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEC68F', endColorstr='#ffffff',GradientType=0 );
+    }
+
+    .back-button {
+        color: #fff!important;
     }
     
     .scroll-content {
@@ -14,11 +38,12 @@ page-related {
             -webkit-border-radius: 8px;
             -moz-border-radius: 8px;
             border-radius: 8px;
-            padding: 20px 40px 20px 20px;
+            padding: 20px 50px 20px 20px;
             color: #fff;
             font-size: 18px;
             text-transform: uppercase;
             position: relative;
+            min-height: 150px;
         }
 
         .box-ass {

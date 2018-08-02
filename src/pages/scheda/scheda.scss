@@ -1,5 +1,10 @@
 page-scheda {
 
+
+    .fab {
+        background: transparent!important;
+        box-shadow: none!important;
+    }
     .hcp-color {
         background: #3b7ab0;
         background: -moz-linear-gradient(top, #3b7ab0 0%, #3697b6 28%, #ffffff 55%);
@@ -22,13 +27,52 @@ page-scheda {
         }
     }
 
+    p {
+        font-size: 18px;
+    }
+
+    .ios-top[top][edge] {
+        top: 45px!important;
+    }
+
+    .android-top[top][edge] {
+        top: 5px!important;
+    }
+
+    .direction_blue {
+        background: #3A80B1!important;
+        color: #fff!important;
+        border: transparent!important;
+    }
+
+    .direction_orange {
+        background: #FF7D00!important;
+        color: #fff!important;
+        border: transparent!important;
+    }
+
+    .accordion-list {
+        .icon {
+            font-weight: 100;
+            font-size: 35px;
+        } 
+    }
+
+    .related button {
+        width: 100%;
+        background: transparent;
+        color: #01587B;
+        padding: 20px 0!important;
+    }
+    
+
     ion-content {
-        
+        font-size: 18px!important;
         .email-phone {
             strong {
                 display: block;
                 width: 100%;
-                font-size: 14px;
+                font-size: 18px;
                 font-weight: 900;
                 color: #01587B;
                 margin-top: 10px;
@@ -36,7 +80,7 @@ page-scheda {
             span {
                 display: block;
                 width: 100%;
-                font-size: 14px;
+                font-size: 18px;
                 color: #01587B;
                 text-transform: capitalize;
                 font-weight: 400;
@@ -55,50 +99,79 @@ page-scheda {
     
     ion-list {
         button.item {
-            padding-right: 16px;
+            padding: 5px 16px 5px 16px;
         }
-        .bg0 {
-            background: #a7dde2;
+        .bgHcp0 {
+            background: #6FC3CE;
         }
-        .bg00 {
-            background: #FBD4AC;
+        .bgHcp1 {
+            background: #B1DDE4;
         }
-        .bg1 {
-            background: #dff2f4;
+        .bgHcp2 {
+            background: #E3F2F5;
         }
-        .bg11 {
-            background: #FDEEDE;
+        .bgAss0 {
+            background: #F29839;
         }
-        .bgInternal0 {
-            background: #a7dce1;
-            background: -moz-linear-gradient(top, #a7dce1 0%, #dcf1f3 100%);
-            background: -webkit-linear-gradient(top, #a7dce1 0%,#dcf1f3 100%);
-            background: linear-gradient(to bottom, #a7dce1 0%,#dcf1f3 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7dce1', endColorstr='#dcf1f3',GradientType=0 );
+        .bgAss1 {
+            background: #FACD9F;
         }
-        .bgInternal1 {
-            background: #dcf1f3;
-            background: -moz-linear-gradient(top, #dcf1f3 0%, #ffffff 100%);
-            background: -webkit-linear-gradient(top, #dcf1f3 0%,#ffffff 100%);
-            background: linear-gradient(to bottom, #dcf1f3 0%,#ffffff 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcf1f3', endColorstr='#ffffff',GradientType=0 );
+        .bgAss2 {
+            background: #FDECD9;
         }
-        .bgInternal00 {
-            background: #FBD4AC;
-            background: -moz-linear-gradient(top, #FBD4AC 0%, #FDEEDE 100%);
-            background: -webkit-linear-gradient(top, #FBD4AC 0%,#FDEEDE 100%);
-            background: linear-gradient(to bottom, #FBD4AC 0%,#FDEEDE 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FBD4AC', endColorstr='#FDEEDE',GradientType=0 );
+
+
+
+
+
+
+        .bgInternalHcp0 {
+            background: #6fc3ce;
+            background: -moz-linear-gradient(top, #6fc3ce 0%, #b1dde4 100%);
+            background: -webkit-linear-gradient(top, #6fc3ce 0%,#b1dde4 100%);
+            background: linear-gradient(to bottom, #6fc3ce 0%,#b1dde4 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6fc3ce', endColorstr='#b1dde4',GradientType=0 );
         }
-        .bgInternal11 {
-            background: #FDEEDE;
-            background: -moz-linear-gradient(top, #FDEEDE 0%, #ffffff 100%);
-            background: -webkit-linear-gradient(top, #FDEEDE 0%,#ffffff 100%);
-            background: linear-gradient(to bottom, #FDEEDE 0%,#ffffff 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcf1f3', endColorstr='#ffffff',GradientType=0 );
+        .bgInternalHcp1 {
+            background: #b1dde4;
+            background: -moz-linear-gradient(top, #b1dde4 0%, #e3f2f5 100%);
+            background: -webkit-linear-gradient(top, #b1dde4 0%,#e3f2f5 100%);
+            background: linear-gradient(to bottom, #b1dde4 0%,#e3f2f5 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1dde4', endColorstr='#e3f2f5',GradientType=0 );
         }
+        .bgInternalHcp2 {
+            background: #e3f2f5;
+            background: -moz-linear-gradient(top, #e3f2f5 0%, #ffffff 100%);
+            background: -webkit-linear-gradient(top, #e3f2f5 0%,#ffffff 100%);
+            background: linear-gradient(to bottom, #e3f2f5 0%,#ffffff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3f2f5', endColorstr='#ffffff',GradientType=0 );
+        }
+        .bgInternalAss0 {
+            background: #f29839;
+            background: -moz-linear-gradient(top, #f29839 0%, #facd9f 100%);
+            background: -webkit-linear-gradient(top, #f29839 0%,#facd9f 100%);
+            background: linear-gradient(to bottom, #f29839 0%,#facd9f 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f29839', endColorstr='#facd9f',GradientType=0 );
+        }
+        .bgInternalAss1 {
+            background: #facd9f;
+            background: -moz-linear-gradient(top, #facd9f 0%, #fdecd9 100%);
+            background: -webkit-linear-gradient(top, #facd9f 0%,#fdecd9 100%);
+            background: linear-gradient(to bottom, #facd9f 0%,#fdecd9 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#facd9f', endColorstr='#fdecd9',GradientType=0 );
+        }
+        .bgInternalAss2 {
+            background: #fdecd9;
+            background: -moz-linear-gradient(top, #fdecd9 0%, #ffffff 100%);
+            background: -webkit-linear-gradient(top, #fdecd9 0%,#ffffff 100%);
+            background: linear-gradient(to bottom, #fdecd9 0%,#ffffff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdecd9', endColorstr='#ffffff',GradientType=0 );
+        }
+
         .list-header {
             margin-bottom: 0!important;
+            background: none;
+            border: none;
         }
     }
     .accordion-list {
@@ -123,21 +196,21 @@ page-scheda {
         background: transparent;
         padding: 10px 60px 10px 60px;
         strong {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 900;
             color: #01587B;
         }
         ul {
             padding-left: 25px;
             li {
-                font-size: 14px;
+                font-size: 18px;
                 color: #01587B;
                 text-transform: capitalize;
                 font-weight: 400;
             }
         }
         .opening-time, .cordinator, .phone, .email {
-            font-size: 14px;
+            font-size: 18px;
             color: #01587B;
             text-transform: capitalize;
             font-weight: 400;
@@ -174,6 +247,7 @@ page-scheda {
     .action-button {
         margin-top: 30px;
         button {
+            font-family: 'Releway-Regular-Bold'!important;
             background: transparent;
             border: 1px solid #01587B;
             color: #01587B;
@@ -199,12 +273,13 @@ page-scheda {
         }
         .social {
             margin-top: 20px;
-            span {
-                margin-right: 10px;
-                color: #fff;
+            button {
+                border: 1px solid #fff;
+                border-radius: 10px;
             }
         }
         .button {
+
             box-shadow: none!important;
             background: transparent;
         }
@@ -216,8 +291,6 @@ page-scheda {
             left: 5px;
             color: #ffc400;
         }
-        #close {
-            right: 5px;
-        }
+        
     }
 }

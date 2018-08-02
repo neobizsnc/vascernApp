@@ -43,6 +43,53 @@ $colors: (
   blue: #3B79B0
 );
 
+@font-face {
+  font-family: 'Releway-Regular';
+  src: url('../assets/fonts/Raleway-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Releway-Regular-Bold';
+  src: url('../assets/fonts/Raleway-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-family-base: 'Releway-Regular';
+$font-family-ios-base: 'Releway-Regular';
+$font-family-md-base: 'Releway-Regular';
+$font-family-wp-base: 'Releway-Regular';
+
+strong {
+  font-family: 'Releway-Regular-Bold'!important;
+}
+
+.toolbar-background-md {
+  background: #31afbb!important;
+  background: -moz-linear-gradient(top, #31afbb 0%, #3b79b0 100%)!important;
+  background: -webkit-linear-gradient(top, #31afbb 0%,#3b79b0 100%)!important;
+  background: linear-gradient(to bottom, #31afbb 0%,#3b79b0 100%)!important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31afbb', endColorstr='#3b79b0',GradientType=0 )!important;
+}
+
+.toolbar-background-ios{
+  background: #31afbb;
+  background: -moz-linear-gradient(top, #31afbb 0%, #3b79b0 100%)!important;
+  background: -webkit-linear-gradient(top, #31afbb 0%,#3b79b0 100%)!important;
+  background: linear-gradient(to bottom, #31afbb 0%,#3b79b0 100%)!important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31afbb', endColorstr='#3b79b0',GradientType=0 )!important;
+}
+
+.toolbar-title-ios {
+  color: #fff!important;
+}
+
+.toolbar-title-md {
+  color: #fff!important;
+}
+
 $tabs-ios-tab-min-height: 55px;
 
 
