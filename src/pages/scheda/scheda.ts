@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController, NavParams, ViewController, Platform, AlertController, } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { RelatedPage } from '../related/related';
+import { FavouritePage } from '../favourite/favourite';
 /**
  * Generated class for the SchedaPage page.
  *
@@ -43,6 +44,11 @@ export class SchedaPage {
     });
     this.structure = this.navParams.get('structure');
     this.getStorage();
+    
+  }
+
+  @Input() set changes(value: boolean) {
+    console.log(value);
   }
 
 
@@ -53,6 +59,7 @@ export class SchedaPage {
       .then(
         () => {
           console.log('Stored item!')
+          
         },
         error => console.error('Error storing item', error)
       );
@@ -136,6 +143,7 @@ export class SchedaPage {
   }
 
   addRemoveFavourite(id) {
+    this.changes = true;
     if(this.favourite.indexOf(id) !== -1) {
       //esite
       let alert = this.alertCtrl.create({

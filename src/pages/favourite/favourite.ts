@@ -21,15 +21,20 @@ import 'rxjs/add/operator/timeout';
   templateUrl: 'favourite.html',
 }) 
 export class FavouritePage {
- 
+
   @ViewChild(Slides) slides: Slides;
  
   structures:any[] = [];
   favourites:any[] = [];
 
   constructor(public nativeStorage: NativeStorage, public modalCtrl: ModalController,private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    console.log("con structor")
+    console.log("constructor")
   }
+
+  ionViewDidEnter() {
+    this.getStorage();
+  }
+
 
   loadStructure(id) {
     this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/' + id).map(res => res.json()).subscribe(data => {
@@ -48,7 +53,6 @@ export class FavouritePage {
   }
 
   ionViewDidLoad() {
-    this.getStorage();
     
     console.log('ionViewDidLoad FavouritePage');
   }
