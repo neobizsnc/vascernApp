@@ -31,6 +31,7 @@ import { SortPipe } from '../pipes/sort/sort';
 import { TruncatePipe } from '../pipes/truncate/truncate';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     LaunchNavigator,
     InAppBrowser,
     NativeStorage,
+    UniqueDeviceID,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

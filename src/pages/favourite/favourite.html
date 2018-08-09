@@ -7,14 +7,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>FAVOURITE</ion-title>
+    <ion-title>FAVORITE</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding no-bounce>
+    <p class="info" *ngIf="structures.length == 0">Add here your favourite HCP and/or Association by clicking on the little star inside their information card</p>
     <ion-slides>
-      <ion-slide class="slide" *ngFor="let structure of structures">
+      <ion-slide [ngClass]="{'slidehcp': structure.type=='hcp', 'slideass': structure.type!='hcp'}" class="slide" *ngFor="let structure of structures">
         <h1 class="center-name"><strong>{{ structure.name | truncate:20 }}</strong></h1>
         <p class="center-info">{{ structure.deparment | truncate:20 }}</p>
         <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>

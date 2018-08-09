@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Platform, AlertController, } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
@@ -8,7 +8,8 @@ import 'rxjs/add/operator/map'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { RelatedPage } from '../related/related';
-import { FavouritePage } from '../favourite/favourite';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+
 /**
  * Generated class for the SchedaPage page.
  *
@@ -25,12 +26,13 @@ export class SchedaPage {
   information: any[]; 
   structure: any;
   favourite: any[] = [];
-  isFavourite: boolean;
+  isFavourite: boolean = false;
   diseaseHcp: any[];
   diseaseAssociation: any[];
   operatingSystem: any;
+  uuid: any;
 
-  constructor(private alertCtrl: AlertController, public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
+  constructor(private uniqueDeviceID: UniqueDeviceID, private alertCtrl: AlertController, public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
     let localData = http.get('assets/structure.json').map(res => res.json().items);
     localData.subscribe(data => {
       this.information = data;
@@ -43,46 +45,16 @@ export class SchedaPage {
       }
     });
     this.structure = this.navParams.get('structure');
-    this.getStorage();
+    //this.getStorage();
+    this.uniqueDeviceID.get().then((uuid: any) => {
+      console.log(uuid);
+      this.uuid = uuid;
+      this.chekFavorite();
+    }).catch((error: any) => console.log(error));
     
   }
 
-  @Input() set changes(value: boolean) {
-    console.log(value);
-  }
-
-
-  setStorage() {
-    this.nativeStorage.clear()
-    this.nativeStorage.remove('favourite')
-    this.nativeStorage.setItem('favourite', this.favourite)
-      .then(
-        () => {
-          console.log('Stored item!')
-          
-        },
-        error => console.error('Error storing item', error)
-      );
-  }
-
-  getStorage() {
-    this.nativeStorage.getItem('favourite')
-    .then(
-      data => {
-        this.favourite = data;
-        if(this.favourite.indexOf(this.structure.id) !== -1) {
-          //esite
-          this.isFavourite = true;
-        } else {
-          this.isFavourite = false;
-        }
-        console.log(this.favourite)
-      },
-      error => {
-        console.error("Nessun dato salvato nello storage")
-      }
-    );
-  }
+  
 
   toggleSection(i) {
     this.information[i].open = !this.information[i].open;
@@ -142,31 +114,156 @@ export class SchedaPage {
     browser.show()
   }
 
-  addRemoveFavourite(id) {
-    this.changes = true;
-    if(this.favourite.indexOf(id) !== -1) {
+
+  chekFavorite() {
+    this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/ChekOnlyFavorites/' + this.uuid + "/" + this.structure.id + "/" + this.structure.type + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+      console.log(data)  
+      if(data) {      
+        this.isFavourite = true;
+      } else {
+        this.isFavourite = false;
+      }
+    });
+  }
+
+  addRemoveFavourite(structure) {
+    this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/ChekFavorites/' + this.uuid + "/" + structure.id + "/" + structure.type + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => { 
+      if(data) {
+        let alert = this.alertCtrl.create({
+          title: 'Information',
+          subTitle: 'Removed from favorites',
+          buttons: ['Ok']
+        });
+        alert.present();
+        this.isFavourite = false;
+      } else {
+        let alert = this.alertCtrl.create({
+          title: 'Information',
+          subTitle: 'Added to favorites',
+          buttons: ['Ok']
+        });
+        alert.present();
+        this.isFavourite = true;
+      }
+    });
+
+    /*var link = 'http://nikola-breznjak.com/_testings/ionicPHP/api.php';
+    var data = JSON.stringify({Uuid: this.uuid, type: structure.type, StructureId: structure.id});
+    
+    this.http.post(link, data).subscribe(data => {
+      console.log(data)
+    }, error => {
+      console.log(error);
+    });/
+
+
+
+
+    /*var found = false;
+
+    this.favourite.forEach(function(el, index, object){
+      if(el.id == structure.id) {
+        found = true;
+        let alert = this.alertCtrl.create({
+          title: 'Information',
+          subTitle: 'Removed from favorites',
+          buttons: ['Ok']
+        });
+        alert.present();
+        this.isFavourite = false;
+        object.splice(index, 1);
+        return;
+      } else {
+        found = false;
+      }
+    })
+
+    
+    if(found == false) {
+      let alert = this.alertCtrl.create({
+        title: 'Information',
+        subTitle: 'Added to favorites',
+        buttons: ['Ok']
+      });
+      alert.present();
+      this.favourite.push(structure);
+      this.isFavourite = true; 
+    }*/
+    /*if(this.favourite.indexOf(structure.id) !== -1) {
       //esite
       let alert = this.alertCtrl.create({
         title: 'Information',
-        subTitle: 'Tolto dai preferiti',
+        subTitle: 'Removed from favorites',
         buttons: ['Ok']
       });
       alert.present();
       this.isFavourite = false;
-      this.favourite.splice(this.favourite.indexOf(id), 1);
+      this.favourite.splice(this.favourite.indexOf(structure.id), 1);
     } else {
       //non esiste
       let alert = this.alertCtrl.create({
         title: 'Information',
-        subTitle: 'Aggiunto ai preferiti',
+        subTitle: 'Added to favorites',
         buttons: ['Ok']
       });
       alert.present();
-      this.favourite.push(id);
+
+      
+      this.favourite.push(obj);
       this.isFavourite = true; 
     }
-    this.setStorage();
+    this.setStorage();*/
   }
+
+
+  /*setStorage() {
+    this.nativeStorage.clear()
+    this.nativeStorage.remove('favourite')
+    this.nativeStorage.setItem('favourite', this.favourite)
+      .then(
+        () => {
+          console.log('Stored item!')
+          
+        },
+        error => console.error('Error storing item', error)
+      );
+  }*/
+
+  /*getStorage() {
+    this.nativeStorage.getItem('favourite').then(data => {
+        this.favourite = data;
+
+        this.favourite.forEach(function(el){
+          if(el.id == this.structure.id) {
+            this.isFavourite = true;
+          }
+        });
+
+
+
+
+
+        if(this.favourite.indexOf(this.structure) !== -1) {
+          this.isFavourite = true;
+        } else {
+          this.isFavourite = false;
+        }
+      },
+      error => {
+        console.error("Nessun dato salvato nello storage")
+      }
+    );
+  }*/
+
+
+
+
+
+
+
+
+
+
 
   goToRelated() {
     this.navCtrl.push(RelatedPage, {

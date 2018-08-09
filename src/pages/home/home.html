@@ -2,7 +2,7 @@
     <ion-navbar color="blue">
       <ion-title>HCP & ASSOCIATION</ion-title>
     </ion-navbar>
-    <div id="ctn-search">
+    <div id="ctn-search" [ngClass]="{'ios': operatingSystem == 'ios', 'android': operatingSystem == 'android'}">
       <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Address, city or zip Code"></ion-searchbar>
       <button id="center-location" (click)="centerLocation()" ion-button>
         <img src="assets/imgs/center_map.svg">
@@ -42,7 +42,7 @@
         <button class="btn-white btn-action" ion-button icon-only (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)">
           <ion-icon name="md-walk"></ion-icon>
         </button>
-        <button id="goto-scheda" (click)="goTo(structure)" ion-button>
+        <button [ngClass]="{'ios': operatingSystem == 'ios', 'android': operatingSystem == 'android'}" id="goto-scheda" (click)="goTo(structure)" ion-button>
           <img src="assets/imgs/Open_Button_Card.svg">
         </button> 
       </div>

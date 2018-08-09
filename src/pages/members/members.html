@@ -14,5 +14,28 @@
 
 
 <ion-content padding>
+  <div *ngFor="let c of structures; let i = index">
+    <span class="country">{{c.key}}</span>
 
+
+    <div *ngFor="let k of c.values; let i = index">
+     
+      <div [ngClass]="{'structures': k.type == 'hcp', 'association': k.type != 'hcp'}" class="box">
+          <span>{{k.name | truncate: 100 }}</span>
+          <button class="goto-scheda" (click)="goTo(k)" ion-button>
+            <img src="assets/imgs/Open_Button_Card.svg">
+          </button> 
+      </div>
+
+      <!--<div *ngFor="let a of k.associationHcp; let i = index" class="association box">
+          <span>{{a.association.name | truncate: 100 }}</span>
+          <button class="goto-scheda" (click)="goTo(a.association)" ion-button>
+            <img src="assets/imgs/Open_Button_Card.svg">
+          </button> 
+      </div>-->
+
+        
+    </div>
+
+  </div>
 </ion-content>

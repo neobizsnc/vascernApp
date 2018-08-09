@@ -15,7 +15,7 @@
 <ion-content [ngClass]="{'association': type=='association', 'hcp': type!='association'}">
   <div *ngIf="type == 'association'">
       <div class="box box-hcp" *ngFor="let c of structuresHcp; let i = index">
-        <strong>{{c.hcpCenter.name}}</strong>
+        <strong>{{c.hcpCenter.name | truncate:20 }}</strong>
         <button id="goto-scheda" (click)="goTo(c.hcpCenter)" ion-button>
             <ion-icon name="ios-add-circle-outline"></ion-icon>
           </button> 
@@ -23,7 +23,7 @@
   </div>
   <div *ngIf="type != 'association'">
       <div class="box box-ass" *ngFor="let c of structuresAss; let i = index">
-        <strong>{{c.association.name}}</strong>
+        <strong>{{c.association.name | truncate:20 }}</strong>
         <button id="goto-scheda" (click)="goTo(c.association)" ion-button>
             <ion-icon name="ios-add-circle-outline"></ion-icon>
           </button> 

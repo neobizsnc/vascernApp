@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import { SchedaPage } from '../scheda/scheda';
 
 /**
  * Generated class for the MembersPage page.
@@ -8,17 +10,58 @@ import { NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+ 
+
 @Component({
   selector: 'page-members',
   templateUrl: 'members.html',
 })
 export class MembersPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  structures:any[] = [];;
+  loading: any; 
+
+  constructor(public http: Http,public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,  public loadingCtrl: LoadingController) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
   }
 
+
+  groupByArray(xs, key) {
+    return xs.reduce(function (rv, x) {
+        let v = key instanceof Function ? key(x) : x[key];
+        let el = rv.find((r) => r && r.key === v);
+        if (el) {
+            el.values.push(x);
+        }
+        else {
+            rv.push({
+                key: v,
+                values: [x]
+            });
+        }
+        return rv;
+    }, []);
+}
+
+  
+
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MembersPage');
+    this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByCountryNew' + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+
+      this.structures = this.groupByArray(data, "country")
+      console.log(this.structures);
+      this.loading.dismiss();
+       
+    });
+  }
+
+  goTo(structure) {
+    let profileModal = this.modalCtrl.create(SchedaPage, { structure: structure });
+     profileModal.present();
   }
 
 }

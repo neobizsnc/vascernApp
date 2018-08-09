@@ -11,10 +11,18 @@ page-home {
 
     #center-location {
       position: absolute;
-      top: 20px;
+      
       right: 0;
       background: transparent;
       box-shadow: none!important;
+    }
+
+    .ios #center-location {
+      top: 20px;
+    }
+
+    .android #center-location {
+      top: 27px;
     }
 
     .searchbar {
@@ -143,14 +151,14 @@ page-home {
           text-align: left;
       }
       .button[icon-only] { 
-        min-width: 100px;
+        min-width: 80px;
         background-color: transparent;
         border: 1px solid #fff;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
       .center-name {
         margin-top: 0;
-        font-size: 20px;
+        font-size: 18px;
         text-transform: uppercase;
         color: #fff;
         text-align: left;

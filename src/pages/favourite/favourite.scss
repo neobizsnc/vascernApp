@@ -1,28 +1,96 @@
 page-favourite {
+
+    ion-content {
+        background: url(../assets/imgs/ern-logo_sfondo.png) no-repeat center center;
+        background-size: contain;
+    } 
   
   .scroll-content {
       overflow-y: hidden!important;
   }
 
+  .info {
+      font-size: 18px;
+      text-align: center;
+      color: #01587B;
+  }
+
+  .slidehcp {
+    background: #3b79b0; /* Old browsers */
+    background: -moz-linear-gradient(top, #3b79b0 0%, #31afbb 15%, #33a4b9 30%, #ffffff 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #3b79b0 0%,#31afbb 15%,#33a4b9 30%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #3b79b0 0%,#31afbb 15%,#33a4b9 30%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b79b0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    .action-button {
+        margin-top: 30px;
+        button {
+            font-family: 'Releway-Regular-Bold'!important;
+            background: transparent;
+            border: 1px solid #01587B;
+            color: #01587B;
+            margin: 10px 5%;
+            width: 90%;
+            text-transform: uppercase;
+            font-weight: bold;
+            .icon {
+                margin-right: 10px;
+            }
+        }
+        .direction {
+            background: #3A80B1!important;
+            color: #fff!important;
+            border: transparent!important;
+        }
+    }
+  }
+
+  .slideass {
+    background: #f69127;
+    background: -moz-linear-gradient(top, #f69127 0%, #fb8612 30%, #ffffff 100%);
+    background: -webkit-linear-gradient(top, #f69127 0%,#fb8612 30%,#ffffff 100%);
+    background: linear-gradient(to bottom, #f69127 0%,#fb8612 30%,#ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f69127', endColorstr='#ffffff',GradientType=0 );
+    .action-button {
+        margin-top: 30px;
+        button {
+            font-family: 'Releway-Regular-Bold'!important;
+            background: transparent;
+            border: 1px solid #ff7d00;
+            color: #fff;
+            margin: 10px 5%;
+            width: 90%;
+            text-transform: uppercase;
+            font-weight: bold;
+            .icon {
+                margin-right: 10px;
+            }
+        }
+        .direction {
+            background: #ff7d00!important;
+            color: #fff!important;
+            border: transparent!important;
+        }
+    }
+  }
+  
   ion-slides {
       position: relative;
-      top: 100px;
+      top: 50px;
       height: 420px;
-      background: #fff!important;
+      background: transparent!important;
       box-shadow: none!important;
       .swiper-container {
         overflow: visible!important;
       }
+
+      
+
       ion-slide {
           align-content: flex-start!important;
           align-items: flex-start!important;
           justify-content: flex-start!important;
           padding: 20px;      
-          background: #3b79b0; /* Old browsers */
-          background: -moz-linear-gradient(top, #3b79b0 0%, #31afbb 15%, #33a4b9 30%, #ffffff 100%); /* FF3.6-15 */
-          background: -webkit-linear-gradient(top, #3b79b0 0%,#31afbb 15%,#33a4b9 30%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(to bottom, #3b79b0 0%,#31afbb 15%,#33a4b9 30%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b79b0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+          
           -webkit-border-radius: 8px;
           -moz-border-radius: 8px;
           border-radius: 8px;
@@ -84,27 +152,7 @@ page-favourite {
               padding: 0 30px;
             }
     
-            .action-button {
-                margin-top: 30px;
-                button {
-                    font-family: 'Releway-Regular-Bold'!important;
-                    background: transparent;
-                    border: 1px solid #01587B;
-                    color: #01587B;
-                    margin: 10px 5%;
-                    width: 90%;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                    .icon {
-                        margin-right: 10px;
-                    }
-                }
-                .direction {
-                    background: #3A80B1!important;
-                    color: #fff!important;
-                    border: transparent!important;
-                }
-            }
+            
           }
       }
       

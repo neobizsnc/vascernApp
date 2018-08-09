@@ -29,12 +29,14 @@ export class SearchResultPage {
     this.orphaCode = this.navParams.get('orphaCode');
     this.website = this.navParams.get('website');
     this.id = this.navParams.get('id');
-    console.log('ionViewDidLoad SearchResultPage');
+    console.log(this.id);
   }
 
   openBrowser() {
-    const browser = this.iab.create(this.website);
-    browser.show()
+    if(this.website != null && this.website != "") {
+      const browser = this.iab.create(this.website);
+      browser.show()
+    }
   } 
 
   goTo() {

@@ -20,7 +20,10 @@ page-scheda {
         background: linear-gradient(to bottom, #f69127 0%,#fb8612 28%,#ffffff 52%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f69127', endColorstr='#ffffff',GradientType=0 );
     }
-
+    .service-p {
+        text-transform: initial;
+        font-size: 18px;
+     }
     .ios {
         .scroll-content {
             top: 40px!important;
@@ -57,12 +60,22 @@ page-scheda {
             font-size: 35px;
         } 
     }
-
+    .related {
+        text-align: center;
+        margin-top: 20px;
+    }
     .related button {
         width: 100%;
         background: transparent;
         color: #01587B;
         padding: 20px 0!important;
+        width: 80%;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    }
+    .relatedAss {
+        color: #F29839!important;
     }
     
 

@@ -14,7 +14,7 @@
   </ion-fab>
   
   <div id="information">
-    <button (click)="addRemoveFavourite(structure.id)" id="favourite" class="icon-scheda" ion-button icon-only>
+    <button (click)="addRemoveFavourite(structure)" id="favourite" class="icon-scheda" ion-button icon-only>
       <ion-icon *ngIf="isFavourite" name="star"></ion-icon>
       <ion-icon *ngIf="!isFavourite" name="star-outline"></ion-icon>
     </button>
@@ -112,11 +112,13 @@
                   <div  *ngIf="structure.service">
                     <div [innerHTML]="structure.service"></div>
                   </div>
-                  <div  *ngIf="structure.type == 'association'">
-                    <button class="related" ion-button (click)="goToRelated(structure.id)" >
-                      See relatd hcp
+
+                  <div class="related relatedAss"  *ngIf="structure.type == 'association'">
+                    <button ion-button (click)="goToRelated(structure.id)" >
+                        See relatd hcp
                     </button>
                   </div>
+
                   <div class="related"  *ngIf="structure.type != 'association'">
                     <button ion-button (click)="goToRelated(structure.id)" >
                       See related association

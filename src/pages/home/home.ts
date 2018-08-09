@@ -29,6 +29,7 @@ export class HomePage {
   cordinateFromSearch: LatLng;
   //google: any;
   markers: any[] = [];
+  operatingSystem: any;
 
   @ViewChild('mapcanvas') mapElement: ElementRef;
   @ViewChild(Slides) slides: Slides;
@@ -48,7 +49,13 @@ export class HomePage {
     this.autocompleteItems = [];
     platform.ready().then((readySource) => { 
       this.height = platform.height();
+      if(this.platform.is('ios')) {
+        this.operatingSystem = "ios";
+      } else {
+        this.operatingSystem = "android";
+      }
     });
+
     keyboard.hideFormAccessoryBar(true);
   }
 
@@ -57,12 +64,14 @@ export class HomePage {
     this.slides.slidesPerView = 1
     if(this.platform.is('ios')) {
       //Iphone X
+      this.operatingSystem = "ios";
       if(this.height > 800) {
         this.height = this.height - this.header.nativeElement.offsetHeight - 85;
       } else {
         this.height = this.height - this.header.nativeElement.offsetHeight - 50;
       }
     } else {
+      this.operatingSystem = "android";
       this.height = this.height - this.header.nativeElement.offsetHeight - 50;
     }
   }
@@ -90,7 +99,7 @@ export class HomePage {
       return;
     }
     //AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k
-    this.http.get('http://vascernapi.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k').map(res => res.json()).subscribe(data => {
+    this.http.get('http://vascernapi.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyBZW73ZAn-6PqKKAVuDOzYzMOB_m2dDLIo').map(res => res.json()).subscribe(data => {
       this.autocompleteItems = [];
       this.autocompleteItems.push(data[0]); 
     });
@@ -99,7 +108,7 @@ export class HomePage {
   //AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k
   selectSearchResult(item){
     this.autocompleteItems = [];   
-    this.http.get('http://vascernapi.azurewebsites.net/Home/GetGeocode?Address=' + item.description + '&ApiKey=AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k').map(res => res.json()).subscribe(data => {
+    this.http.get('http://vascernapi.azurewebsites.net/Home/GetGeocode?Address=' + item.description + '&ApiKey=AIzaSyBZW73ZAn-6PqKKAVuDOzYzMOB_m2dDLIo').map(res => res.json()).subscribe(data => {
       if(data.status === 'OK' && data.results[0]){
         this.lat = data.results[0].geometry.location.lat;
         this.lng = data.results[0].geometry.location.lng;
@@ -121,7 +130,7 @@ export class HomePage {
   }
 
   loadStructure(id) {
-    this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByDiseaseId/' + id).map(res => res.json()).subscribe(data => {
+    this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByDiseaseId/' + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
       let latLng = new google.maps.LatLng(-34.9290, 138.6010);
  
       let mapOptions = {
@@ -136,6 +145,7 @@ export class HomePage {
       data.diseaseAssociation.forEach((val) => {
         this.structuresAssCenter.push(val.association)
       }); 
+      console.log(this.structuresAssCenter)
       this.map = GoogleMaps.create('test');
       this.map.getMyLocation().then((location: MyLocation) => {
         this.newMap.setCenter(new google.maps.LatLng(location.latLng.lat, location.latLng.lng));
@@ -148,7 +158,6 @@ export class HomePage {
 
   setMarker() {
     this.structuresAssCenter.forEach((val, index) => {
-      console.log(val)
       let ico:any;
       if(val.type == "association") {
         ico = 'assets/imgs/GEO_ASSOCIATION_OFF.svg'
@@ -179,7 +188,6 @@ export class HomePage {
   }
 
   sortResults(position) {
-    console.log(position)
     var latlon = new LatLon(position.lat, position.lng);
     var locationArray = Array.prototype.slice.call(this.structuresAssCenter, 0); 
     locationArray.forEach(function(el){
