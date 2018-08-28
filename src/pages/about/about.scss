@@ -13,6 +13,7 @@ page-about {
         padding: 30px 0 20px 0;
         p {
             font-size: 18px;
+            text-align: justify;
             line-height: 26px;
             color: #01587B;
             margin-bottom: 5px;
@@ -29,6 +30,10 @@ page-about {
             color: #01587B;
             border-radius: 5px;
             font-size: 14px;
+            width: 55px;
         }
+    }
+    .button-md:hover:not(.disable-hover) {
+        background: transparent;
     }
 }

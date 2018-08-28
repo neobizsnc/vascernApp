@@ -42,7 +42,6 @@ export class RelatedPage {
 
   ionViewDidLoad() {
     if(this.type == "association") {
-
       this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetRelatedHcp/' + this.id).map(res => res.json()).subscribe(data => {
         this.structuresHcp = data
         this.loading.dismiss();

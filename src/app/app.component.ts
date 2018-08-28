@@ -20,7 +20,7 @@ export class MyApp {
     platform.ready().then(() => {
       // Now the native side is ready. Let's set the page.
       this.presentLoading();
-      this.storage.get('introShown1111').then((result) => {
+      this.storage.get('introShown').then((result) => {
  
         if(result){
           this.rootPage = TabsPage;

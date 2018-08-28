@@ -33,4 +33,24 @@ page-search-result {
         left: 10%;
         width: 80%;
     }
+    .gotomap {
+        background: #01587B;
+        color: #fff;
+    }
+
+    .gotomap:hover {
+        background: #33A3B9!important;
+        color: #01587B;
+    }
+    .gotomap:active {
+        background: #33A3B9!important;
+        color: #01587B;
+    }
+
+    .button:hover {
+        background: transparent!important;
+    }
+    .button:active {
+        background: transparent!important;
+    }
 }

@@ -50,6 +50,7 @@ export class FavouritePage {
         data.forEach(element => {
           this.loadStructure(element.structureId, element.type);
         });
+        this.slides.slideTo(0);
         this.loading.dismiss();
       } else {
         this.loading.dismiss();
@@ -86,26 +87,6 @@ export class FavouritePage {
     this.slides.spaceBetween = 20;
     this.slides.slidesPerView = 1.2 ;
   }
-
-
-  /*getStorage() {
-    this.structures = []
-    this.nativeStorage.getItem('favourite')
-    .then(
-      data => {
-        this.favourites = data;
-        data.forEach(element => {
-          //this.loadStructure(element);
-          this.structures.push(element);
-        });
-        this.loading.dismiss();
-      },
-      error => {
-        this.loading.dismiss();
-        console.error("Nessun dato salvato nello storage")
-      }
-    );
-  }*/
 
   call(number) {
     this.callNumber.callNumber(number, false);

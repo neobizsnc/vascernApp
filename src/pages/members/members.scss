@@ -28,7 +28,7 @@ page-members {
         font-size: 18px;
         text-transform: uppercase;
         position: relative;
-        min-height: 150px;
+        min-height: 200px;
         margin-top: 10px;
     }
     .goto-scheda {
@@ -49,4 +49,10 @@ page-members {
           margin: 30px 0;
           display: block;
       }
+      .button:hover {
+          background: transparent!important; 
+      }
+      .button:active {
+        background: transparent!important; 
+    }
 }

@@ -53,7 +53,16 @@ export class MembersPage {
     this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByCountryNew' + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
 
       this.structures = this.groupByArray(data, "country")
-      console.log(this.structures);
+
+      this.structures.sort(function(a, b){
+        var nameA=a.key.toLowerCase(), nameB=b.key.toLowerCase();
+        if (nameA < nameB) //sort string ascending
+         return -1;
+        if (nameA > nameB)
+         return 1;
+        return 0; //default return value (no sorting)
+       });
+
       this.loading.dismiss();
        
     });
