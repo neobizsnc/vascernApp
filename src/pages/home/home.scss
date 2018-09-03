@@ -89,14 +89,41 @@ page-home {
         overflow: visible!important;
       }
     }
+
+    .swiper-slide-active {
+      animation:animateActive 0.3s
+    }
     .swiper-slide-next {
-      height: 70%;
-      bottom: -60px;
+      height: 70%!important;
+      bottom: -60px!important;
+      animation:animateDeActive 0.3s
     }
     .swiper-slide-prev {
-      height: 70%;
-      bottom: -60px;
+      height: 70%!important;
+      bottom: -60px!important;
+      animation:animateDeActive 0.3s
+
     }
+
+    @keyframes animateActive{
+      from{
+        bottom:-60px;
+        height: 70%;
+      } 
+      to{bottom:0;height: 100%;}
+    }
+
+    @keyframes animateDeActive{
+      from{
+        bottom:0;height: 100%;
+      } 
+      to{
+        bottom:-60px;
+        height: 70%;
+        
+      }
+    }
+
     ion-slide {
       
       .btn-action {

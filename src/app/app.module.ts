@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { AboutPage } from '../pages/about/about';
 import { CreditsPage } from '../pages/credits/credits';
@@ -95,6 +96,7 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id';
     InAppBrowser,
     NativeStorage,
     UniqueDeviceID,
+    Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

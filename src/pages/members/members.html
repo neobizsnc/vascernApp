@@ -18,10 +18,10 @@
     <span class="country">{{c.key}}</span>
 
 
-    <div *ngFor="let k of c.values; let i = index">
+    <div *ngFor="let k of c.values; let i = index" (click)="goTo(k)">
      
       <div [ngClass]="{'structures': k.type == 'hcp', 'association': k.type != 'hcp'}" class="box">
-          <span>{{k.name | truncate: 100 }}</span>
+          <span>{{k.name | truncate: 80 }}</span>
           <button class="goto-scheda" (click)="goTo(k)" ion-button>
             <img src="assets/imgs/Open_Button_Card.svg">
           </button> 

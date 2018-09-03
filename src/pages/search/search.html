@@ -19,7 +19,7 @@
   
   <ion-list>
     <ion-item *ngFor="let c of structures | search : terms | sort: { property: column, order: order }; let i = index">
-      <div (click)="goTo(c.name, c.orphacode, c.website, c.id)">
+      <div (click)="goTo(c)">
           <h2><strong>{{c.name}}</strong></h2>
           <p>ORPHA NO. {{c.orphacode}}</p>
           <ion-icon name="ios-arrow-forward"></ion-icon>

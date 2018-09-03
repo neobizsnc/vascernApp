@@ -29,7 +29,6 @@ export class SearchResultPage {
     this.orphaCode = this.navParams.get('orphaCode');
     this.website = this.navParams.get('website');
     this.id = this.navParams.get('id');
-    console.log(this.id);
   }
 
   openBrowser() {

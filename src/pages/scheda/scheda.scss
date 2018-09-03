@@ -19,6 +19,19 @@ page-scheda {
         background: -webkit-linear-gradient(top, #f69127 0%,#fb8612 28%,#ffffff 52%);
         background: linear-gradient(to bottom, #f69127 0%,#fb8612 28%,#ffffff 52%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f69127', endColorstr='#ffffff',GradientType=0 );
+        .label {
+            color: #E37205!important;
+        }
+        .blue-color {
+            color: #E37205!important;
+        }
+        .action-button button {
+            color: #E37205;
+            border-color: #E37205;
+        }
+        .direction_orange {
+            color: #fff!important;
+        }
     }
     .service-p {
         text-transform: initial;

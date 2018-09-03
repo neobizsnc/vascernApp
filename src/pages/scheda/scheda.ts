@@ -45,16 +45,12 @@ export class SchedaPage {
       }
     });
     this.structure = this.navParams.get('structure');
-    //this.getStorage();
     this.uniqueDeviceID.get().then((uuid: any) => {
-      console.log(uuid);
       this.uuid = uuid;
       this.chekFavorite();
     }).catch((error: any) => console.log(error));
     
   }
-
-  
 
   toggleSection(i) {
     this.information[i].open = !this.information[i].open;
@@ -146,124 +142,7 @@ export class SchedaPage {
         this.isFavourite = true;
       }
     });
-
-    /*var link = 'http://nikola-breznjak.com/_testings/ionicPHP/api.php';
-    var data = JSON.stringify({Uuid: this.uuid, type: structure.type, StructureId: structure.id});
-    
-    this.http.post(link, data).subscribe(data => {
-      console.log(data)
-    }, error => {
-      console.log(error);
-    });/
-
-
-
-
-    /*var found = false;
-
-    this.favourite.forEach(function(el, index, object){
-      if(el.id == structure.id) {
-        found = true;
-        let alert = this.alertCtrl.create({
-          title: 'Information',
-          subTitle: 'Removed from favorites',
-          buttons: ['Ok']
-        });
-        alert.present();
-        this.isFavourite = false;
-        object.splice(index, 1);
-        return;
-      } else {
-        found = false;
-      }
-    })
-
-    
-    if(found == false) {
-      let alert = this.alertCtrl.create({
-        title: 'Information',
-        subTitle: 'Added to favorites',
-        buttons: ['Ok']
-      });
-      alert.present();
-      this.favourite.push(structure);
-      this.isFavourite = true; 
-    }*/
-    /*if(this.favourite.indexOf(structure.id) !== -1) {
-      //esite
-      let alert = this.alertCtrl.create({
-        title: 'Information',
-        subTitle: 'Removed from favorites',
-        buttons: ['Ok']
-      });
-      alert.present();
-      this.isFavourite = false;
-      this.favourite.splice(this.favourite.indexOf(structure.id), 1);
-    } else {
-      //non esiste
-      let alert = this.alertCtrl.create({
-        title: 'Information',
-        subTitle: 'Added to favorites',
-        buttons: ['Ok']
-      });
-      alert.present();
-
-      
-      this.favourite.push(obj);
-      this.isFavourite = true; 
-    }
-    this.setStorage();*/
   }
-
-
-  /*setStorage() {
-    this.nativeStorage.clear()
-    this.nativeStorage.remove('favourite')
-    this.nativeStorage.setItem('favourite', this.favourite)
-      .then(
-        () => {
-          console.log('Stored item!')
-          
-        },
-        error => console.error('Error storing item', error)
-      );
-  }*/
-
-  /*getStorage() {
-    this.nativeStorage.getItem('favourite').then(data => {
-        this.favourite = data;
-
-        this.favourite.forEach(function(el){
-          if(el.id == this.structure.id) {
-            this.isFavourite = true;
-          }
-        });
-
-
-
-
-
-        if(this.favourite.indexOf(this.structure) !== -1) {
-          this.isFavourite = true;
-        } else {
-          this.isFavourite = false;
-        }
-      },
-      error => {
-        console.error("Nessun dato salvato nello storage")
-      }
-    );
-  }*/
-
-
-
-
-
-
-
-
-
-
 
   goToRelated() {
     this.navCtrl.push(RelatedPage, {
