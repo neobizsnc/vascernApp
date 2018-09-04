@@ -48,7 +48,6 @@
     "cordova-plugin-googlemaps": "^2.3.8",
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git#2.7.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
-    "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-nativegeocoder": "^3.1.2",
     "cordova-plugin-nativestorage": "^2.3.2",
@@ -85,7 +84,6 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-advanced-http": {},
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-email-composer": {},
@@ -100,7 +98,8 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-nativestorage": {},
       "call-number": {},
-      "cordova-plugin-uniquedeviceid": {}
+      "cordova-plugin-uniquedeviceid": {},
+      "ionic-plugin-keyboard": {}
     },
     "platforms": [
       "ios",

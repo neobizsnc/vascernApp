@@ -77,6 +77,7 @@ export class SearchPage {
     this.nativeStorage.getItem('search')
     .then(
       data => {
+        console.log(data)
         this.seachStructures = data;
         this.structures = data;
       },
@@ -86,12 +87,12 @@ export class SearchPage {
 
   goTo(c) {
 
-    this.navCtrl.push(SearchResultPage, {
+    /*this.navCtrl.push(SearchResultPage, {
       name: c.name,
       orphaCode: c.orphacode,
       website: c.website,
       id: c.id
-    });
+    });*/
 
     this.seachStructures.push(c);
     this.nativeStorage.clear()
