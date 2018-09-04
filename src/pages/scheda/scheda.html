@@ -98,7 +98,7 @@
                     </ul> 
                   </div>
               </div>
-              <div  *ngIf="child.name=='SERVICES'">
+              <div  *ngIf="child.name=='SERVICES'" class="services">
                   <strong>Services</strong>
                   <div [innerHTML]="structure.coreService"></div>
                   <div  *ngIf="structure.otherSpecialistInside">
@@ -115,13 +115,13 @@
 
                   <div class="related relatedAss"  *ngIf="structure.type == 'association'">
                     <button ion-button (click)="goToRelated(structure.id)" >
-                        See relatd hcp
+                        See relatd hcp <br> center
                     </button>
                   </div>
 
                   <div class="related"  *ngIf="structure.type != 'association'">
                     <button ion-button (click)="goToRelated(structure.id)" >
-                      See related association
+                      See related association <br> center
                     </button>
                   </div>
               </div>

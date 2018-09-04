@@ -93,7 +93,7 @@ export class SearchPage {
       id: c.id
     });
 
-    /*this.seachStructures.push(c);
+    this.seachStructures.push(c);
     this.nativeStorage.clear()
     this.nativeStorage.remove('search')
     this.nativeStorage.setItem('search', this.seachStructures)
@@ -108,6 +108,6 @@ export class SearchPage {
           console.log('Stored item!')
         }, 
         error => console.error('Error storing item', error)
-    );*/
+    );
   }
 }
