@@ -71,7 +71,8 @@
           <!-- Direct Add Button as Fallback -->
           <ion-item *ngIf="!child.children" ion-item detail-none class="child-item" text-wrap>
               <div  *ngIf="child.name=='CONTACTS'">
-                  <strong>Hcp coordinator</strong> 
+                  <strong *ngIf="structure.type!='association'">Hcp coordinator</strong> 
+                  <strong *ngIf="structure.type=='association'">Personnel to contact</strong> 
                   <div class="cordinator" [innerHTML]="structure.cordinator"></div>
                   <!--<div class="phone" [innerHTML]="structure.phone"></div>
                   <div class="email" [innerHTML]="structure.email"></div>-->
@@ -121,7 +122,7 @@
 
                   <div class="related"  *ngIf="structure.type != 'association'">
                     <button ion-button (click)="goToRelated(structure.id)" >
-                      See related association <br> center
+                      See related <br> association
                     </button>
                   </div>
               </div>
