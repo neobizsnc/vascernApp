@@ -45,6 +45,7 @@ export class SchedaPage {
       }
     });
     this.structure = this.navParams.get('structure');
+    console.log(this.structure)
     this.uniqueDeviceID.get().then((uuid: any) => {
       this.uuid = uuid;
       this.chekFavorite();

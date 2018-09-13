@@ -86,14 +86,14 @@ export class SearchPage {
   }
 
   goTo(c) {
-
+/*
     this.navCtrl.push(SearchResultPage, {
       name: c.name,
       orphaCode: c.orphacode,
       website: c.website,
       id: c.id
     });
-/*
+*/
     this.seachStructures.push(c);
     this.nativeStorage.clear()
     this.nativeStorage.remove('search')
@@ -109,6 +109,6 @@ export class SearchPage {
           console.log('Stored item!')
         }, 
         error => console.error('Error storing item', error)
-    );*/
+    );
   }
 }

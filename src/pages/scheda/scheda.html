@@ -20,9 +20,9 @@
     </button>
     
     <h1><strong>{{structure.name}}</strong></h1>
-    <p>{{structure.deparment}}</p>
-    <p>{{structure.address}}, {{structure.zipcode}}, {{structure.city}}</p>
-    <p>{{structure.country}}</p>
+    <p *ngIf="structure.deparment != null">{{structure.deparment}}</p>
+    <p><span *ngIf="structure.address != null">{{structure.address}},</span> <span *ngIf="structure.zipcode != null">{{structure.zipcode}},</span> <span *ngIf="structure.city != null">{{structure.city}}</span></p>
+    <p *ngIf="structure.country != null">{{structure.country}}</p>
 
     <div class="social">
       <button *ngIf="structure.facebook" ion-button icon-only (click)="openBrowser(structure.facebook)">
@@ -37,6 +37,9 @@
       <button *ngIf="structure.hcpWebsite" ion-button icon-only (click)="openBrowser(structure.hcpWebsite)">
           <ion-icon name="ios-link"></ion-icon>
       </button>
+      <button *ngIf="structure.website" ion-button icon-only (click)="openBrowser(structure.website)">
+        <ion-icon name="ios-link"></ion-icon>
+    </button>
     </div>
   </div>
   
@@ -74,12 +77,19 @@
                   <strong *ngIf="structure.type!='association'">Hcp coordinator</strong> 
                   <strong *ngIf="structure.type=='association'">Personnel to contact</strong> 
                   <div class="cordinator" [innerHTML]="structure.cordinator"></div>
-                  <!--<div class="phone" [innerHTML]="structure.phone"></div>
-                  <div class="email" [innerHTML]="structure.email"></div>-->
+                  <div *ngIf="structure.type=='association'" class="cordinator coordinator-ass">{{structure.contact}}</div>
+                  
+                  <div *ngIf="structure.type=='association' && structure.phoneDirect!=null" class="email-phone email-phone-ass">
+                    <strong>PH:</strong>
+                    <span (click)="call(structure.phoneDirect)">{{structure.phoneDirect}}</span>
+                  </div>
+                  
+
                   <div class="email-phone" *ngFor="let c of structure.centerEmail; let i = index">
                     <strong>{{c.label}}</strong>
                     <span (click)="email()">{{c.email}}</span>
                   </div>
+               
                   <div class="email-phone" *ngFor="let c of structure.centerPhone; let i = index">
                     <strong>{{c.label}}</strong>
                     <span (click)="call(c.phone)">{{c.phone}}</span>
@@ -115,13 +125,13 @@
                   </div>
 
                   <div class="related relatedAss"  *ngIf="structure.type == 'association'">
-                    <button ion-button (click)="goToRelated(structure.id)" >
+                    <button class="btnrelated" ion-button (click)="goToRelated(structure.id)" >
                         See relatd hcp <br> center
                     </button>
                   </div>
 
-                  <div class="related"  *ngIf="structure.type != 'association'">
-                    <button ion-button (click)="goToRelated(structure.id)" >
+                  <div class="related relatedhcp"  *ngIf="structure.type != 'association'">
+                    <button class="btnrelated" ion-button (click)="goToRelated(structure.id)" >
                       See related <br> association
                     </button>
                   </div>
@@ -138,12 +148,12 @@
   </ion-list>
   
   <div class="action-button">
-      <button ion-button icon-start (click)="call(structure.phoneDirect)" >
+      <button class="callbtn" ion-button icon-start (click)="call(structure.phoneDirect)" >
         <ion-icon name="md-call"></ion-icon>
         Call now
       </button>
         
-      <button (click)="email(structure.emailDirect)" ion-button icon-start>
+      <button class="emailbtn" (click)="email(structure.emailDirect)" ion-button icon-start>
         <ion-icon name="md-mail"></ion-icon>
         Send Email
       </button>

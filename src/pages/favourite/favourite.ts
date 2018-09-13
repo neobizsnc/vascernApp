@@ -9,6 +9,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the FavouritePage page.
@@ -29,7 +30,7 @@ export class FavouritePage {
   loading: any;
   uuid: any;
 
-  constructor(private uniqueDeviceID: UniqueDeviceID, public nativeStorage: NativeStorage, public modalCtrl: ModalController,private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(private alertCtrl: AlertController, private uniqueDeviceID: UniqueDeviceID, public nativeStorage: NativeStorage, public modalCtrl: ModalController,private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -114,24 +115,33 @@ export class FavouritePage {
     let profileModal = this.modalCtrl.create(SchedaPage, { structure: structure });
      profileModal.present();
   }
- 
-  /*setStorage() {
-    this.nativeStorage.clear()
-    this.nativeStorage.remove('favourite')
-    this.nativeStorage.setItem('favourite', this.favourites)
-      .then(
-        () => {
-          console.log('Stored item!')
-        }, 
-        error => console.error('Error storing item', error)
-      );
-  }*/
 
   deleteFavourite(id) { 
-    this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/DeletePersonalFavorites/' + this.uuid + "/" + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
-      this.structures = [];
-      this.getFavorites();
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      message: 'Are you sure you want to remove this card from your favorites?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'YES',
+          handler: () => {
+            this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/DeletePersonalFavorites/' + this.uuid + "/" + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+              this.structures = [];
+              this.getFavorites();
+            });
+          }
+        }
+      ]
     });
+    alert.present();
   } 
+
+
 
 }

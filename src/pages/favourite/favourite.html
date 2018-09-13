@@ -21,11 +21,11 @@
         <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>
         <p class="center-info">{{ structure.country }}</p>
         <div class="action-button">
-          <button ion-button icon-start (click)="call(structure.phoneDirect)" >
+          <button class="callbtn" ion-button icon-start (click)="call(structure.phoneDirect)" >
             <ion-icon name="md-call"></ion-icon>
             Call now
           </button>
-          <button (click)="email(structure.emailDirect)"ion-button icon-start>
+          <button class="emailbtn" (click)="email(structure.emailDirect)"ion-button icon-start>
             <ion-icon name="md-mail"></ion-icon>
             Send Email
           </button>
@@ -35,7 +35,7 @@
           </button>
         </div>
         <button id="goto-scheda" (click)="goTo(structure)" ion-button>
-          <ion-icon name="ios-add-circle-outline"></ion-icon>
+          <img src="assets/imgs/Open_Button_Card.svg">
         </button>
         <button (click)="deleteFavourite(structure.id)" id="favourite" ion-button>
           <ion-icon name="star"></ion-icon>

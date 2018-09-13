@@ -135,7 +135,7 @@ export class HomePage {
  
       let mapOptions = {
         center: latLng,
-        zoom: 15,
+        zoom: 6,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       } 
       this.newMap = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -171,7 +171,7 @@ export class HomePage {
         title: 'Hello World!'
       });
       marker.addListener('click', () => {
-        this.newMap.setZoom(8);
+        this.newMap.setZoom(6);
         this.newMap.setCenter(marker.getPosition());
         this.slides.slideTo(index, 500);
       }); 

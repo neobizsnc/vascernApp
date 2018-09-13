@@ -38,12 +38,12 @@ page-search-result {
         color: #fff;
     }
 
-    .gotomap:hover {
+    .gotomap:hover, .gotoorpha:hover {
         background: #71c8cf!important;
         border: 1px solid #71c8cf;
         color: #01587B;
     }
-    .gotomap:active {
+    .gotomap:active, .gotoorpha:active {
         background: #71c8cf!important;
         border: 1px solid #71c8cf;
         color: #01587B;

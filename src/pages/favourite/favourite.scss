@@ -1,5 +1,30 @@
 page-favourite {
 
+    .slidehcp {
+        .callbtn:hover, .emailbtn:hover {
+            background: #71c8cf!important;
+            border: 1px solid #71c8cf!important;
+            color: #01587B;
+        }
+        .callbtn:active, .emailbtn:active {
+            background: #71c8cf!important;
+            border: 1px solid #71c8cf!important;
+            color: #01587B;
+        }
+    }
+
+    .slideass {
+        .callbtn:hover, .emailbtn:hover {
+            background: #fbd5ad!important;
+            border: 1px solid #fbd5ad!important;
+        }
+        .callbtn:active, .emailbtn:active {
+            background: #fbd5ad!important;
+            border: 1px solid #fbd5ad!important;
+        }
+    }
+    
+
     ion-content {
         background: url(../assets/imgs/ern-logo_sfondo.png) no-repeat center center;
         background-size: contain;
@@ -22,7 +47,10 @@ page-favourite {
     background: linear-gradient(to bottom, #3b79b0 0%,#31afbb 15%,#33a4b9 30%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b79b0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
     .action-button {
-        margin-top: 30px;
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        bottom: 20px;
         button {
             font-family: 'Releway-Regular-Bold'!important;
             background: transparent;
@@ -51,7 +79,10 @@ page-favourite {
     background: linear-gradient(to bottom, #f69127 0%,#fb8612 30%,#ffffff 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f69127', endColorstr='#ffffff',GradientType=0 );
     .action-button {
-        margin-top: 30px;
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        bottom: 20px;
         button {
             font-family: 'Releway-Regular-Bold'!important;
             background: transparent;
@@ -101,6 +132,7 @@ page-favourite {
               text-align: center;
               display: block;
               width: 100%;
+              height: 100%;
               img {
                   width: 100%;
               }
