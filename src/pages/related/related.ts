@@ -24,6 +24,7 @@ export class RelatedPage {
   id: any;
   type: any;
   os: string;
+  theColor: any = "blue";
 
   constructor(public plt: Platform, public modalCtrl: ModalController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
@@ -38,6 +39,12 @@ export class RelatedPage {
     this.loading.present();
     this.id = this.navParams.get('id');
     this.type = this.navParams.get('type');
+
+    if(this.type != 'association') {
+      this.theColor= "blue";
+    } else {
+      this.theColor= "orange";
+    }
   }
 
   ionViewDidLoad() {

@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header [ngClass]="{'ios': os=='ios', 'android': os=='android'}">
-  <ion-navbar color="blue">
+  <ion-navbar [color]="theColor">
     <ion-title *ngIf="type == 'association'">Related Hcp</ion-title>
     <ion-title *ngIf="type != 'association'">Related Association</ion-title>
   </ion-navbar>

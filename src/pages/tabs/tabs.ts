@@ -3,7 +3,7 @@ import { MenuPage } from '../menu/menu';
 import { SearchPage } from '../search/search';
 import { FavouritePage } from '../favourite/favourite';
 import { MembersPage } from '../members/members';
-
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 @Component({
@@ -21,9 +21,10 @@ export class TabsPage {
   tab4Root = MembersPage;
 
 
-  constructor() {
+  constructor(public keyboard: Keyboard) {
 
   }
+
 
 
 
