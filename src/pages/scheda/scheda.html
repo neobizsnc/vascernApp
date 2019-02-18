@@ -87,7 +87,7 @@
 
                   <div class="email-phone" *ngFor="let c of structure.centerEmail; let i = index">
                     <strong>{{c.label}}</strong>
-                    <span (click)="email()">{{c.email}}</span>
+                    <span (click)="email(c.email)">{{c.email}}</span>
                   </div>
                
                   <div class="email-phone" *ngFor="let c of structure.centerPhone; let i = index">

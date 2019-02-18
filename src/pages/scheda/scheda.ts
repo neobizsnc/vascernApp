@@ -85,10 +85,8 @@ export class SchedaPage {
   email(em) {
     let email = {
       to: em,
-      //cc: 'erika@mustermann.de',
-      //bcc: ['john@doe.com', 'jane@doe.com'],
-      subject: 'Info',
-      body: 'Info',
+      subject: '',
+      body: '',
       isHtml: true
     };
     this.emailComposer.open(email);
