@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "KONTAKTY",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "CIEĽOVÉ OCHORENIA",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "SLUŽBY",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "OTVÁRACIE HODINY",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

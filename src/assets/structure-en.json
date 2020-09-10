@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "CONTACTS",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "TARGET DISEASES",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "SERVICES",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "OPENING HOURS",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

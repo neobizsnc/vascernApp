@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "KONTAKTLISTE",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "SCHLÜSSELERKRANKUNGEN/ZIELERKRANKUNGEN",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "DIENSTLEISTUNGEN",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "ÖFFNUNGSZEITEN",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

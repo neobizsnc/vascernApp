@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "CONTACTPERSONEN",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "SPECIFIEKE AANDOENING",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "DIENSTEN",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "OPENINGSTIJDEN",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

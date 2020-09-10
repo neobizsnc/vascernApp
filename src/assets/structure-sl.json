@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "STIKI",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "CILJNE BOLEZNI",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "POMOČ",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "OBRATOVALNI ČAS",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

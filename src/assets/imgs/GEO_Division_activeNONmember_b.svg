@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="44px" viewBox="0 0 35 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>GEO_Division_active_arancione</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+      <linearGradient id="linearGradient-1" x1="-96.9026549%" y1="50%" x2="100%" y2="49.386302%">
+        <stop stop-color="#FFFEFF" offset="0%"></stop>
+        <stop stop-color="#F7BA06" offset="54.3117172%"></stop>
+        <stop stop-color="#20AC83" offset="100%"></stop>
+		  </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="GEO_Division_active_arancione" fill-rule="nonzero">
+            <ellipse id="Oval-2" fill="#30AD79" cx="17.5" cy="40.3030303" rx="13.9646465" ry="2.82828283"></ellipse>
+            <g id="GEO_active">
+                <path d="M6.20502969,9.76238872 C9.37369141,5.55202281 14.4206178,2.82828283 20.1054021,2.82828283 C28.1878344,2.82828283 34.9808899,8.33410115 36.9196581,15.790292 C37.2819629,17.1836568 37.4747475,18.6451321 37.4747475,20.1515152 C37.4747475,29.7188726 29.698227,37.4747475 20.1054021,37.4747475 C14.455117,37.4747475 9.43497118,34.7839662 6.26292549,30.6171309 C4.04960016,27.7096818 -2.47474747,20.1515152 -2.47474747,20.1515152 C-2.47474747,20.1515152 4.02671256,12.656832 6.20502969,9.76238872 Z" id="cancel" fill="url(#linearGradient-1)" transform="translate(17.500000, 20.151515) scale(-1, 1) rotate(-90.000000) translate(-17.500000, -20.151515) "></path>
+                <path id="cancel-path" fill="#FFFFFF" d="M9.9,12.5l5,4.9l-5,4.9c-0.2,0.2-0.2,0.4,0,0.6l1.9,1.8c0.2,0.2,0.4,0.2,0.6,0l5-4.9l5,4.9 c0.2,0.2,0.4,0.2,0.6,0l1.9-1.8c0.2-0.2,0.2-0.4,0-0.6l-5-4.9l5-4.9c0.2-0.2,0.2-0.4,0-0.6L22.9,10c-0.2-0.2-0.4-0.2-0.6,0 l-5,4.9l-5-4.9c-0.2-0.2-0.4-0.2-0.6,0l-1.9,1.8C9.7,12,9.7,12.3,9.9,12.5z"/>
+            </g>
+        </g>
+    </g>
+</svg>

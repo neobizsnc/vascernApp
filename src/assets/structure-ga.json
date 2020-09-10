@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "TEAGMHÁLACHA ",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "GALAIR SPRIOCDHÍRITHE",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "SEIRBHÍSÍ",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "UAIREANTA OSCAILTE",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

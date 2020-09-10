@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "KAPCSOLATOK",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "CÉLBETEGSÉGEK",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "SZOLGÁLTATÁSOK",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "NYITVATARTÁSI IDŐ",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

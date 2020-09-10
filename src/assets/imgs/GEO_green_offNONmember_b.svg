@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="29px" viewBox="0 0 25 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>GEO_association_ON</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+      <linearGradient x1="-118.605916%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+          <stop stop-color="#FFFEFF" offset="0%"></stop>
+          <stop stop-color="#F7BA06" offset="60.434504%"></stop>
+          <stop stop-color="#20AC83" offset="100%"></stop>
+      </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="GEO_association_ON" fill-rule="nonzero">
+            <path d="M4.43216407,6.9731348 C6.69549386,3.96573058 10.3004413,2.02020202 14.3610015,2.02020202 C20.1341674,2.02020202 24.9863499,5.95292939 26.3711843,11.27878 C26.6299735,12.2740406 26.7676768,13.3179515 26.7676768,14.3939394 C26.7676768,21.2277662 21.2130193,26.7676768 14.3610015,26.7676768 C10.3250836,26.7676768 6.73926513,24.8456901 4.47351821,21.8693792 C2.89257154,19.7926299 -1.76767677,14.3939394 -1.76767677,14.3939394 C-1.76767677,14.3939394 2.87622326,9.04059432 4.43216407,6.9731348 Z" id="cancel" fill="url(#linearGradient-1)" transform="translate(12.500000, 14.393939) scale(-1, 1) rotate(-90.000000) translate(-12.500000, -14.393939) "></path>
+            <path id="cancel-path" fill="#FFFFFF" d="M7,8.9l3.6,3.5L7,15.8c-0.1,0.1-0.1,0.3,0,0.4l1.3,1.3c0.1,0.1,0.3,0.1,0.4,0l3.6-3.5 l3.6,3.5c0.1,0.1,0.3,0.1,0.4,0l1.3-1.3c0.1-0.1,0.1-0.3,0-0.4l-3.6-3.5l3.6-3.5c0.1-0.1,0.1-0.3,0-0.4l-1.3-1.3 c-0.1-0.1-0.3-0.1-0.4,0l-3.6,3.5L8.8,7.2C8.7,7.1,8.5,7,8.4,7.2L7,8.5C6.9,8.6,6.9,8.8,7,8.9z"/>
+        </g>
+    </g>
+</svg>

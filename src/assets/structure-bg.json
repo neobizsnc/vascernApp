@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "КОНТАКТИ",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "ПРИЦЕЛНИ ЗАБОЛЯВАНИЯ",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "ЗДРАВНИ УСЛУГИ",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "РАБОТНО ВРЕМЕ",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}

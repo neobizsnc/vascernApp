@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "name": "ΕΠΙΚΟΙΝΩΝΙΑ",
+            "children": [
+                {
+                    "name": "CONTACTS"
+                }
+            ]
+        },
+        {
+            "name": "ΣΤΟΧΕΥΟΜΕΝΕΣ ΑΣΘΕΝΕΙΕΣ",
+            "children": [
+                {
+                    "name": "TARGET DISEASES"
+                }
+            ]
+        },
+        {
+            "name": "ΥΠΗΡΕΣΙΕΣ",
+            "children": [
+                {
+                    "name": "SERVICES"
+                }
+            ]
+        },
+        {
+            "name": "ΏΡΕΣ ΛΕΙΤΟΥΡΓΙΑΣ",
+            "children": [
+                {
+                    "name": "OPENING HOURS"
+                }
+            ]
+        }
+    ]
+}
