@@ -10,11 +10,11 @@
         <ion-slide>
           <ion-row>
               <ion-col>
-                  <p><strong>It’s simple! <br/> Search for the <br/> rare disease</strong></p>
+                <p [innerHTML]="'Tutorial1' | translate"></p>
                   <img src="assets/imgs/tutorial1.png" />
                   <div class="btn-ctn">
-                    <button class="skip btnAction" ion-button color="light" (click)="goToHome()">SKIP</button>
-                    <button class="btnAction" ion-button color="light" (click)="goNext()">OK</button> 
+                    <button class="skip btnAction" ion-button color="light" (click)="goToHome()">{{ 'SKIP' | translate }}</button>
+                    <button class="btnAction" ion-button color="light" (click)="goNext()">{{ 'Ok' | translate }}</button> 
                   </div>
               </ion-col>
             </ion-row>
@@ -22,11 +22,11 @@
         <ion-slide>
           <ion-row>
               <ion-col>
-                <p><strong>See the <br/> structures <br/> nearby</strong></p>
+                <p [innerHTML]="'Tutorial2' | translate"></p>
                 <img src="assets/imgs/tutorial2.png" />
                 <div class="btn-ctn">
-                  <button class="btnAction skip" ion-button color="light" (click)="goToHome()">SKIP</button>
-                  <button class="btnAction" ion-button color="light" (click)="goNext()">OK</button>
+                  <button class="btnAction skip" ion-button color="light" (click)="goToHome()">{{ 'SKIP' | translate }}</button>
+                  <button class="btnAction" ion-button color="light" (click)="goNext()">{{ 'Ok' | translate }}</button>
                 </div>
               </ion-col> 
             </ion-row>
@@ -34,10 +34,10 @@
         <ion-slide>
           <ion-row>
             <ion-col>
-                <p><strong>Get all the  <br/> information you <br/> want</strong></p>
+                <p [innerHTML]="'Tutorial2' | translate"></p>
                 <img src="assets/imgs/tutorial3.png" />
                 <div class="btn-ctn">
-                  <button class="btnAction" ion-button color="light" (click)="goToHome()">OK</button>
+                  <button class="btnAction" ion-button color="light" (click)="goToHome()">{{ 'Ok' | translate }}</button>
                 </div>
             </ion-col>
           </ion-row>

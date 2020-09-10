@@ -6,13 +6,13 @@
 -->
 <ion-header>
   <ion-navbar color="blue">
-    <ion-title>RARE DISEASE</ion-title>
+    <ion-title>{{ 'Disease' | translate }}</ion-title>
   </ion-navbar>
-  <ion-searchbar spellcheck="true" placeholder="TYPE HERE" [(ngModel)]="terms"></ion-searchbar>
-  <p class="info">Type the name of the <strong>rare <br/> disease</strong> or the <strong>Orpha Code</strong></p>
+  <ion-searchbar (keyup.enter)="test()" spellcheck="true" placeholder="{{ 'Type' | translate }}" [(ngModel)]="terms"></ion-searchbar>
+  <p id="testing" class="info" [innerHTML]="'InfoSearch' | translate"></p>
   <div id="btn-ctn">
-    <button [ngClass]="{'sortActive': last==false }" class="sort" ion-button type="button" (click)="lastSearch()">Last Search</button>
-    <button [ngClass]="{'sortActive': az==false }" class="sort" ion-button type="button" (click)="sort()">A-Z List</button> 
+    <button [ngClass]="{'sortActive': last==false }" class="sort" ion-button type="button" (click)="lastSearch()">{{ 'Search' | translate }}</button>
+    <button [ngClass]="{'sortActive': az==false }" class="sort" ion-button type="button" (click)="sort()">{{ 'List' | translate }}</button> 
   </div>
 </ion-header>
 <ion-content>
@@ -21,7 +21,7 @@
     <ion-item *ngFor="let c of structures | search : terms | sort: { property: column, order: order }; let i = index">
       <div (click)="goTo(c)">
           <h2><strong>{{c.name}}</strong></h2>
-          <p>ORPHA NO. {{c.orphacode}}</p>
+          <p>{{ 'OrphaN' | translate }} {{c.disease.orphacode}}</p>
           <ion-icon name="ios-arrow-forward"></ion-icon>
       </div>
     </ion-item>

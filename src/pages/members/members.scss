@@ -19,6 +19,15 @@ page-members {
         background: linear-gradient(to bottom, #ff7d00 0%,#f59128 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7d00', endColorstr='#f59128',GradientType=0 ); /* IE6-9 */
     }
+
+    .hcp-n {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#33a3b9+0,31afbb+50,3b79b0+100 */
+        background: #20AC83!important;
+        background: -moz-linear-gradient(top, #20AC83 0%, #20AC83 50%, #20AC83 100%)!important; /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #20AC83 0%,#20AC83 50%,#20AC83 100%)!important; /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #20AC83 0%,#20AC83 50%,#20AC83 100%)!important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#20AC83', endColorstr='#20AC83',GradientType=0 )!important; /* IE6-9 */
+    }
     .box {
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;

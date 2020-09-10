@@ -1,4 +1,7 @@
 page-menu {
+    ion-label {
+        white-space: normal!important;
+    }
     ion-content {
         background: url(../assets/imgs/ern-logo_sfondo.png) no-repeat center center;
         background-size: contain;
@@ -13,6 +16,7 @@ page-menu {
             text-transform: uppercase;
             padding: 10px 0;
             margin: 0;
+            word-break: break-all;
         }
         ion-icon {
             display: inline-block;

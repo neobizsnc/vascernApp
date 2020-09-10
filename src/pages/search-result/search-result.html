@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="blue">
-    <ion-title>RARE DISEASE</ion-title>
+    <ion-title>{{ 'Disease' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,14 +15,13 @@
 
 <ion-content padding>
     <h1><strong>{{ name }}</strong></h1>
-    <p>ORPHA NO. {{ orphaCode }}</p>
+    <p>{{ 'OrphaN' | translate }} {{ orphaCode }}</p>
     <div class="ctn-call">
         <button class="btn-call-to-action gotomap" ion-button (click)="goTo()">
-            See on the Map
+          {{ 'Map' | translate }}
         </button> 
         <button class="btn-call-to-action gotoorpha" ion-button (click)="openBrowser()">
-            Go To Orphanet
+          {{ 'GoTo' | translate }}
         </button>
     </div>
-    
 </ion-content>

@@ -6,15 +6,15 @@
 -->
 <ion-header [ngClass]="{'ios': os=='ios', 'android': os=='android'}">
   <ion-navbar [color]="theColor">
-    <ion-title *ngIf="type == 'association'">Related Hcp</ion-title>
-    <ion-title *ngIf="type != 'association'">Related Association</ion-title>
+    <ion-title *ngIf="type == 'association'">{{ 'Related' | translate }}</ion-title>
+    <ion-title *ngIf="type != 'association'">{{ 'Related1' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content [ngClass]="{'association': type=='association', 'hcp': type!='association'}">
   <div *ngIf="type == 'association'">
-      <div class="noInfo noInfoOrange" *ngIf="structuresHcp.length == 0"> NO INFO AVAILABLE</div>
+      <div class="noInfo noInfoOrange" *ngIf="structuresHcp.length == 0">{{ 'NoInfo' | translate }}</div>
       <div class="box box-hcp" *ngFor="let c of structuresHcp; let i = index">
         <strong>{{c.hcpCenter.name | truncate:20 }}</strong>
         <button id="goto-scheda" (click)="goTo(c.hcpCenter)" ion-button>
@@ -23,7 +23,7 @@
       </div>
   </div>
   <div *ngIf="type != 'association'">
-      <div class="noInfo noInfoBlue" *ngIf="structuresAss.length == 0"> NO INFO AVAILABLE</div>
+      <div class="noInfo noInfoBlue" *ngIf="structuresAss.length == 0">{{ 'NoInfo' | translate }}</div>
       <div class="box box-ass" *ngFor="let c of structuresAss; let i = index">
         <strong>{{c.association.name | truncate:20 }}</strong>
         <button id="goto-scheda" (click)="goTo(c.association)" ion-button>

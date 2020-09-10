@@ -1,9 +1,9 @@
 <ion-header #header>
     <ion-navbar color="blue">
-      <ion-title>HCP & ASSOCIATION</ion-title>
+      <ion-title>{{ 'HcpAss' | translate }}</ion-title>
     </ion-navbar>
     <div id="ctn-search" [ngClass]="{'ios': operatingSystem == 'ios', 'android': operatingSystem == 'android'}">
-      <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Address, city or zip Code"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{ 'Address' | translate }}"></ion-searchbar>
       <button id="center-location" (click)="centerLocation()" ion-button>
         <img src="assets/imgs/center_map.svg">
       </button> 
@@ -24,16 +24,19 @@
   <div id="test" style="display: none"></div>
   <div id="legend">
       <img src="assets/imgs/GEO_HCP_OFF.svg">
-      <span class="blue">HCP</span>
+      <span class="blue" (click)="alertLegend('hcp')">{{ 'hcp' | translate }}</span>
       <img class="orange-img" src="assets/imgs/GEO_ASSOCIATION_OFF.svg">
-      <span class="orange">Association</span>
+      <span class="orange" (click)="alertLegend('ass')">{{ 'association' | translate }}</span>
+      <img class="orange-img" src="assets/imgs/GEO_green_offNONmember.svg">
+      <span class="green" (click)="alertLegend('ref')">{{ 'ref_hcp' | translate }}</span>
     </div>
   <div id="map_canvas" #mapcanvas  [ngStyle]="setStyles()">
     
   </div>
   <ion-slides  (ionSlideDidChange)="slideChanged()">
     <ion-slide class="slide" *ngFor="let structure of structuresAssCenter ">
-      <div [ngClass]="{'slideBG': structure.type != 'association', 'slideBGA': structure.type == 'association'} ">
+
+      <div  [ngClass]="{'slideBG': structure.type != 'association', 'slideBGA': structure.type == 'association', 'slideBGAN': structure.isAffiliated == true && structure.isEarn == false } ">
         <h1 class="center-name"><strong>{{ structure.name | truncate:20 }}</strong></h1>
         <p class="center-info">{{ structure.address }}, {{ structure.zipcode }} - {{ structure.city }}</p>
         <button class="btn-action" ion-button icon-only (click)="call(structure.phoneDirect)">

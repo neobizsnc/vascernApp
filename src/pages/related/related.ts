@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { SchedaPage } from '../scheda/scheda';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
+import { LanguageactiveProvider } from '../../providers/languageactive/languageactive';
 
 /**
  * Generated class for the RelatedPage page.
@@ -26,7 +27,7 @@ export class RelatedPage {
   os: string;
   theColor: any = "blue";
 
-  constructor(public plt: Platform, public modalCtrl: ModalController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+  constructor(public lng: LanguageactiveProvider, public plt: Platform, public modalCtrl: ModalController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -49,12 +50,12 @@ export class RelatedPage {
 
   ionViewDidLoad() {
     if(this.type == "association") {
-      this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetRelatedHcp/' + this.id).map(res => res.json()).subscribe(data => {
+      this.http.get('http://vascern.azurewebsites.net/api/HcpCentersApi/GetRelatedHcp/' + this.id + '/' + this.lng.languageActive).map(res => res.json()).subscribe(data => {
         this.structuresHcp = data
         this.loading.dismiss();
       });
     } else {
-      this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetRelatedAssociation/' + this.id).map(res => res.json()).subscribe(data => {
+      this.http.get('http://vascern.azurewebsites.net/api/HcpCentersApi/GetRelatedAssociation/' + this.id + '/' + this.lng.languageActive).map(res => res.json()).subscribe(data => {
         this.structuresAss = data
         this.loading.dismiss();
       });

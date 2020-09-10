@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
-import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -24,7 +23,6 @@ import { SearchResultPage } from '../pages/search-result/search-result';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HTTP } from '@ionic-native/http';
 import { HttpModule } from '@angular/http';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SearchPipe } from '../pipes/search/search';
@@ -33,6 +31,16 @@ import { TruncatePipe } from '../pipes/truncate/truncate';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Globalization } from '@ionic-native/globalization';
+import { LanguageactiveProvider } from '../providers/languageactive/languageactive';
+import { CallNumber } from '@ionic-native/call-number';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -58,6 +66,14 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule, // <--- add this
+    TranslateModule.forRoot({ // <--- add this
+      loader: { // <--- add this 
+        provide: TranslateLoader, // <--- add this
+        useFactory: (createTranslateLoader),  // <--- add this
+        deps: [HttpClient] // <--- add this
+      } // <--- add this
+    }),
     IonicModule.forRoot(MyApp,{
       // These options are available in ionic-angular@2.0.0-beta.2 and up.
       scrollPadding: false,
@@ -90,14 +106,16 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id';
     SplashScreen,
     HTTP,
     HttpModule,
-    CallNumber,
     EmailComposer,
     LaunchNavigator,
     InAppBrowser,
     NativeStorage,
     UniqueDeviceID,
     Keyboard,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Globalization,
+    CallNumber,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LanguageactiveProvider
   ]
 })
 export class AppModule {}

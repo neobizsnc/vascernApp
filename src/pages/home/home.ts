@@ -1,11 +1,13 @@
 import { Component, ViewChild, NgZone, ElementRef } from '@angular/core';
-import { NavController, Slides, Keyboard, Platform, NavParams, ModalController } from 'ionic-angular';
+import { NavController, Slides, Keyboard, Platform, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { SchedaPage } from '../scheda/scheda';
 import { CallNumber } from '@ionic-native/call-number';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { GoogleMaps, GoogleMap, LatLng, MyLocation } from '@ionic-native/google-maps';
+import { LanguageactiveProvider } from '../../providers/languageactive/languageactive';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var LatLon: any;
 declare var google: any;
@@ -27,7 +29,7 @@ export class HomePage {
   lng: any;
   height: any; 
   cordinateFromSearch: LatLng;
-  //google: any;
+  google: any;
   markers: any[] = [];
   operatingSystem: any;
 
@@ -35,19 +37,23 @@ export class HomePage {
   @ViewChild(Slides) slides: Slides;
   @ViewChild('header') header: ElementRef;
 
-  constructor(private callNumber: CallNumber, 
+  constructor(private callNumber: CallNumber,
+    private alertCtrl: AlertController,
+              public translate: TranslateService, 
               private launchNavigator: LaunchNavigator, 
               public modalCtrl: ModalController, 
               public navParams: NavParams, 
               public platform: Platform, 
               public navCtrl: NavController, 
               public http: Http, 
-              public zone: NgZone, public keyboard: Keyboard) {
+              public zone: NgZone, public keyboard: Keyboard,
+              public lngP: LanguageactiveProvider) {
     this.autocomplete = {
       input: ''
     };
     this.autocompleteItems = [];
     platform.ready().then((readySource) => { 
+      keyboard.hideFormAccessoryBar(false);
       this.height = platform.height();
       if(this.platform.is('ios')) {
         this.operatingSystem = "ios";
@@ -56,7 +62,7 @@ export class HomePage {
       }
     });
 
-    keyboard.hideFormAccessoryBar(true);
+    keyboard.hideFormAccessoryBar(false);
   }
 
   ngAfterViewInit() {
@@ -99,7 +105,7 @@ export class HomePage {
       return;
     }
     //AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k
-    this.http.get('http://vascernapi.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyBZW73ZAn-6PqKKAVuDOzYzMOB_m2dDLIo').map(res => res.json()).subscribe(data => {
+    this.http.get('http://vascern.azurewebsites.net/Home/GetEventVenuesList?SearchText=' + this.autocomplete.input + '&ApiKey=AIzaSyBZW73ZAn-6PqKKAVuDOzYzMOB_m2dDLIo').map(res => res.json()).subscribe(data => {
       this.autocompleteItems = [];
       this.autocompleteItems.push(data[0]); 
     });
@@ -108,7 +114,7 @@ export class HomePage {
   //AIzaSyDZ15vkJWNNl3tpZWRAPvoA3tBkpTqUt0k
   selectSearchResult(item){
     this.autocompleteItems = [];   
-    this.http.get('http://vascernapi.azurewebsites.net/Home/GetGeocode?Address=' + item.description + '&ApiKey=AIzaSyBZW73ZAn-6PqKKAVuDOzYzMOB_m2dDLIo').map(res => res.json()).subscribe(data => {
+    this.http.get('http://vascern.azurewebsites.net/Home/GetGeocode?Address=' + item.description + '&ApiKey=AIzaSyBZW73ZAn-6PqKKAVuDOzYzMOB_m2dDLIo').map(res => res.json()).subscribe(data => {
       if(data.status === 'OK' && data.results[0]){
         this.lat = data.results[0].geometry.location.lat;
         this.lng = data.results[0].geometry.location.lng;
@@ -129,23 +135,39 @@ export class HomePage {
     this.loadStructure(this.navParams.get('id'));
   }
 
+  //'http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByDiseaseId/' + id + "?" + Math.random().toString(36) OLD
+  //'http://vascern.azurewebsites.net/api/HcpCentersApi/GetCentersByDiseaseId/' + id + "/en?" + Math.random().toString(36)
+  // "/" + this.lngP.languageActive + "?"
   loadStructure(id) {
-    this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/GetCentersByDiseaseId/' + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+    console.log(this.lngP.languageActive)
+    this.http.get('http://vascern.azurewebsites.net/api/HcpCentersApi/GetCentersByDiseaseId/' + id + "/english?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
       let latLng = new google.maps.LatLng(-34.9290, 138.6010);
  
       let mapOptions = {
         center: latLng,
-        zoom: 6,
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       } 
       this.newMap = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      
+     
       data.diseaseCenter.forEach((val) => {
-        this.structuresAssCenter.push(val.hcpCenter)
+        if(val.hcpCenter.hcpCenterTraslation[0] != "" && val.hcpCenter.hcpCenterTraslation[0] != null) {
+          this.structuresAssCenter.push(val.hcpCenter.hcpCenterTraslation[0])
+        }
       });
-      data.diseaseAssociation.forEach((val) => {
-        this.structuresAssCenter.push(val.association)
-      }); 
-      console.log(this.structuresAssCenter)
+
+      if(data.diseaseAssociation.length != 0) {
+        
+        data.diseaseAssociation.forEach((val) => {
+          if(val.association.associationTranslation[0] != "" && val.association.associationTranslation[0] != null) {
+            this.structuresAssCenter.push(val.association.associationTranslation[0])
+          }
+        }); 
+      }
+      
+      console.log(this.structuresAssCenter);
+
       this.map = GoogleMaps.create('test');
       this.map.getMyLocation().then((location: MyLocation) => {
         this.newMap.setCenter(new google.maps.LatLng(location.latLng.lat, location.latLng.lng));
@@ -161,17 +183,24 @@ export class HomePage {
       let ico:any;
       if(val.type == "association") {
         ico = 'assets/imgs/GEO_ASSOCIATION_OFF.svg'
-      } else {
+      } 
+      if (val.type == "hcp"){
         ico = 'assets/imgs/GEO_HCP_OFF.svg'
+      } 
+       if(val.type == 'hcp' && val.isEarn == false && val.isAffiliated == true){
+        ico = 'assets/imgs/GEO_green_offNONmember.svg'
       }
       let marker = new google.maps.Marker({
         position: {lat: parseFloat(val.lat), lng: parseFloat(val.lng)},
         map: this.newMap,
-        icon: {  url : ico },
+        icon: {  url : ico, size: {
+          height: 44,
+          width: 35
+        } },
         title: 'Hello World!'
       });
       marker.addListener('click', () => {
-        this.newMap.setZoom(6);
+        this.newMap.setZoom(15);
         this.newMap.setCenter(marker.getPosition());
         this.slides.slideTo(index, 500);
       }); 
@@ -196,6 +225,7 @@ export class HomePage {
     });
     this.sortByKey(locationArray, "distance")
     this.structuresAssCenter = locationArray
+    this.newMap.setCenter(new google.maps.LatLng(this.structuresAssCenter[0].lat, this.structuresAssCenter[0].lng));
   };
 
   sortByKey(array, key) {
@@ -212,19 +242,35 @@ export class HomePage {
     this.structuresAssCenter.forEach((val, index) => {
       if(val.type == 'association') {
         this.markers[index].icon.url = 'assets/imgs/GEO_ASSOCIATION_OFF.svg';
-      } else {
+        this.markers[index].icon.size.height = 44;
+        this.markers[index].icon.size.width = 35;
+      } 
+       if(val.type == 'hcp') {
         this.markers[index].icon.url = 'assets/imgs/GEO_HCP_OFF.svg';
+        this.markers[index].icon.size.height = 44;
+        this.markers[index].icon.size.width = 35;
+      } 
+       if(val.type == 'hcp' && val.isEarn == false && val.isAffiliated == true) {
+        this.markers[index].icon.url = 'assets/imgs/GEO_green_offNONmember.svg';
+        this.markers[index].icon.size.height = 44;
+        this.markers[index].icon.size.width = 35;
       }
     })
 
-    console.log(this.markers[currentIndex])
+    
     
     if(this.structuresAssCenter[currentIndex].type == 'association') {
       this.markers[currentIndex].icon.url = 'assets/imgs/GEO_ASSOCIATION_ON.svg';
       this.markers[currentIndex].icon.size.height = 44;
       this.markers[currentIndex].icon.size.width = 35;
-    } else {
+    } 
+     if(this.structuresAssCenter[currentIndex].type == 'hcp') {
       this.markers[currentIndex].icon.url = 'assets/imgs/GEO_HCP_ON.svg';
+      this.markers[currentIndex].icon.size.height = 44;
+      this.markers[currentIndex].icon.size.width = 35;
+    } 
+     if(this.structuresAssCenter[currentIndex].type == 'hcp' && this.structuresAssCenter[currentIndex].isEarn == false && this.structuresAssCenter[currentIndex].isAffiliated == true) {
+      this.markers[currentIndex].icon.url = 'assets/imgs/GEO_Division_activeNONmember.svg';
       this.markers[currentIndex].icon.size.height = 44;
       this.markers[currentIndex].icon.size.width = 35;
     }
@@ -247,6 +293,39 @@ export class HomePage {
         success => console.log('Launched navigator'),
         error => console.log('Error launching navigator', error)
       );
+  }
+
+  alertLegend(type) {
+
+    var hcp = "";
+    var ass = "";
+    var ref = "";
+    this.translate.get('healthcare').subscribe((res: string) => {
+      hcp = res;
+    });
+    this.translate.get('patient').subscribe((res: string) => {
+      ass = res;
+    });
+    this.translate.get('referral').subscribe((res: string) => {
+      ref = res;
+    });
+
+    if(type == "hcp") {
+      let alert = this.alertCtrl.create({
+        message: hcp,
+      });
+      alert.present();
+    } else if(type == "ass") {
+      let alert = this.alertCtrl.create({
+        message: ass,
+      });
+      alert.present();
+    } else {
+      let alert = this.alertCtrl.create({
+        message: ref,
+      });
+      alert.present();
+    }
   }
 
 }

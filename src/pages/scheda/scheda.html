@@ -5,172 +5,191 @@
   Ionic pages and navigation.
 -->
 
-<ion-content [ngClass]="{'hcp-color': structure.type != 'association', 'ass-color': structure.type == 'association', 'ios': operatingSystem == 'ios', 'android': operatingSystem == 'android' }">
-  
+<ion-content
+  [ngClass]="{'hcp-color': structure.type != 'association', 'ass-color': structure.type == 'association', 'hcp-color-n': structure.isAffiliated == true && structure.isEarn == false, 'ios': operatingSystem == 'ios', 'android': operatingSystem == 'android' }">
 
 
-  <ion-fab [ngClass]="{'ios-top': operatingSystem=='ios', 'android-top': operatingSystem=='android'}" top right edge (click)="close()">
-    <button ion-fab><img src="assets/imgs/Close_button_card.svg"/></button>
+
+  <ion-fab [ngClass]="{'ios-top': operatingSystem=='ios', 'android-top': operatingSystem=='android'}" top right edge
+    (click)="close()">
+    <button ion-fab><img width="30" height="30" src="assets/imgs/Close_button_card.svg" /></button>
   </ion-fab>
-  
   <div id="information">
     <button (click)="addRemoveFavourite(structure)" id="favourite" class="icon-scheda" ion-button icon-only>
       <ion-icon *ngIf="isFavourite" name="star"></ion-icon>
       <ion-icon *ngIf="!isFavourite" name="star-outline"></ion-icon>
     </button>
-    
     <h1><strong>{{structure.name}}</strong></h1>
+    <span class="affiliated" *ngIf="structure.isEarn">VASCERN Affiliated Partners</span>
+    <span class="affiliated" *ngIf="structure.isAffiliated">Referral center cooperating with VASCERN</span>
     <p *ngIf="structure.deparment != null">{{structure.deparment}}</p>
-    <p><span *ngIf="structure.address != null">{{structure.address}},</span> <span *ngIf="structure.zipcode != null">{{structure.zipcode}},</span> <span *ngIf="structure.city != null">{{structure.city}}</span></p>
+    <p><span *ngIf="structure.address != null">{{structure.address}},</span> <span
+        *ngIf="structure.zipcode != null">{{structure.zipcode}},</span> <span
+        *ngIf="structure.city != null">{{structure.city}}</span></p>
     <p *ngIf="structure.country != null">{{structure.country}}</p>
-
     <div class="social">
       <button *ngIf="structure.facebook" ion-button icon-only (click)="openBrowser(structure.facebook)">
-          <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-facebook"></ion-icon>
       </button>
       <button *ngIf="structure.twitter" ion-button icon-only (click)="openBrowser(structure.twitter)">
-          <ion-icon name="logo-twitter"></ion-icon>
+        <ion-icon name="logo-twitter"></ion-icon>
       </button>
       <button *ngIf="structure.youtube" ion-button icon-only (click)="openBrowser(structure.youtube)">
-          <ion-icon name="logo-youtube"></ion-icon>
+        <ion-icon name="logo-youtube"></ion-icon>
       </button>
       <button *ngIf="structure.hcpWebsite" ion-button icon-only (click)="openBrowser(structure.hcpWebsite)">
-          <ion-icon name="ios-link"></ion-icon>
+        <ion-icon name="ios-link"></ion-icon>
       </button>
       <button *ngIf="structure.website" ion-button icon-only (click)="openBrowser(structure.website)">
         <ion-icon name="ios-link"></ion-icon>
-    </button>
+      </button>
+      <button *ngIf="structure.hcpSecondWebsite" ion-button icon-only (click)="openBrowser(structure.hcpSecondWebsite)">
+        <ion-icon name="ios-link"></ion-icon>
+      </button>
+      <button *ngIf="structure.secondWebsite" ion-button icon-only (click)="openBrowser(structure.secondWebsite)">
+        <ion-icon name="ios-link"></ion-icon>
+      </button>
     </div>
   </div>
-  
-
   <ion-list class="accordion-list">
     <!-- First Level -->
     <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
       <!-- Toggle Button -->
-      <button ion-item (click)="toggleSection(i)"  detail-none [ngClass]="{'section-active': item.open, 'section': !item.open, 
+      <button ion-item (click)="toggleSection(i)" detail-none
+        [ngClass]="{'section-active': item.open, 'section': !item.open, 
                                                                         'bgHcp0': i==0 && structure.type != 'association', 
                                                                         'bgHcp1': i==1 && structure.type != 'association', 
                                                                         'bgHcp2': i==2 && structure.type != 'association', 
                                                                         'bgAss0': i==0 && structure.type == 'association', 
                                                                         'bgAss1': i==1 && structure.type == 'association',
                                                                         'bgAss2': i==2 && structure.type == 'association' }">
-          <ion-icon class="blue-color" item-left name="ios-contact-outline" *ngIf="i==0"></ion-icon>
-          <ion-icon class="blue-color" item-left name="ios-medkit-outline" *ngIf="i==1"></ion-icon>
-          <ion-icon class="blue-color" item-left name="ios-information-circle-outline" *ngIf="i==2"></ion-icon>
-          <ion-icon class="blue-color" item-left name="ios-time-outline" *ngIf="i==3"></ion-icon>
-          <strong>{{ item.name }}</strong>
-          <ion-icon class="blue-color small-ico" item-right name="ios-arrow-down" *ngIf="!item.open"></ion-icon>
-          <ion-icon class="blue-color small-ico" item-right name="ios-arrow-up" *ngIf="item.open"></ion-icon>
+        <ion-icon class="blue-color" item-left name="ios-contact-outline" *ngIf="i==0"></ion-icon>
+        <ion-icon class="blue-color" item-left name="ios-medkit-outline" *ngIf="i==1"></ion-icon>
+        <ion-icon class="blue-color" item-left name="ios-information-circle-outline" *ngIf="i==2"></ion-icon>
+        <ion-icon class="blue-color" item-left name="ios-time-outline" *ngIf="i==3"></ion-icon>
+        <strong>{{ item.name }}</strong>
+        <ion-icon class="blue-color small-ico" item-right name="ios-arrow-down" *ngIf="!item.open"></ion-icon>
+        <ion-icon class="blue-color small-ico" item-right name="ios-arrow-up" *ngIf="item.open"></ion-icon>
       </button>
-      <ion-list *ngIf="item.children && item.open" no-lines [ngClass]="{ 'bgInternalHcp0': i==0 && structure.type != 'association', 
+      <ion-list *ngIf="item.children && item.open" no-lines
+        [ngClass]="{ 'bgInternalHcp0': i==0 && structure.type != 'association', 
                                                                          'bgInternalHcp1': i==1 && structure.type != 'association',
                                                                          'bgInternalHcp2': i==2 && structure.type != 'association', 
                                                                          'bgInternalAss0': i==0 && structure.type == 'association', 
                                                                          'bgInternalAss1': i==1 && structure.type == 'association', 
-                                                                         'bgInternalAss2': i==2 && structure.type == 'association' }"> 
+                                                                         'bgInternalAss2': i==2 && structure.type == 'association' }">
         <!-- Second Level -->
-        <ion-list-header *ngFor="let child of item.children; let j = index" no-padding >
+        <ion-list-header *ngFor="let child of item.children; let j = index" no-padding>
           <!-- Direct Add Button as Fallback -->
           <ion-item *ngIf="!child.children" ion-item detail-none class="child-item" text-wrap>
-              <div  *ngIf="child.name=='CONTACTS'">
-                  <strong *ngIf="structure.type!='association'">Hcp coordinator</strong> 
-                  <strong *ngIf="structure.type=='association'">Personnel to contact</strong> 
-                  <div class="cordinator" [innerHTML]="structure.cordinator"></div>
-                  <div *ngIf="structure.type=='association'" class="cordinator coordinator-ass">{{structure.contact}}</div>
-                  
-                  <div *ngIf="structure.type=='association' && structure.phoneDirect!=null" class="email-phone email-phone-ass">
-                    <strong>PH:</strong>
-                    <span (click)="call(structure.phoneDirect)">{{structure.phoneDirect}}</span>
-                  </div>
-                  
+            <div *ngIf="child.name=='CONTACTS'">
+              <strong *ngIf="structure.type!='association'">{{ 'Scheda1' | translate }}</strong>
+              <strong *ngIf="structure.type=='association'">{{ 'Scheda2' | translate }}</strong>
+              <div class="cordinator" [innerHTML]="structure.cordinator"></div>
+              <div *ngIf="structure.type=='association'" class="cordinator coordinator-ass">{{structure.contact}}</div>
 
-                  <div class="email-phone" *ngFor="let c of structure.centerEmail; let i = index">
-                    <strong>{{c.label}}</strong>
-                    <span (click)="email(c.email)">{{c.email}}</span>
-                  </div>
-               
-                  <div class="email-phone" *ngFor="let c of structure.centerPhone; let i = index">
-                    <strong>{{c.label}}</strong>
-                    <span (click)="call(c.phone)">{{c.phone}}</span>
-                  </div>
-                  <div>
-                    <span (click)="call(structure.phone)">{{structure.phone}}</span>
-                  </div>
-                  <div>
-                    <span (click)="email(structure.email)">{{structure.email}}</span>
-                  </div>
+              <div *ngIf="structure.type=='association' && structure.phoneDirect!=null"
+                class="email-phone email-phone-ass">
+                <strong>{{ 'Contacts' | translate }}</strong>
+                <span (click)="call(structure.phoneDirect)">{{structure.phoneDirect}}</span>
+                <span *ngIf="structure.secondPhone!=null" (click)="call(structure.secondPhone)">{{structure.secondPhone}}</span>
+                <span *ngIf="structure.emailDirect!=null" (click)="email(structure.emailDirect)">{{structure.emailDirect}}</span>
+                <span *ngIf="structure.secondEmail!=null" (click)="email(structure.secondEmail)">{{structure.secondEmail}}</span>
               </div>
-              <div *ngIf="child.name=='TARGET DISEASES'">
-                  <div>
-                    <ul> 
-                      <li *ngFor="let c of diseaseHcp; let i = index">{{c.disease.name}}</li>
-                      <li *ngFor="let c of diseaseAssociation; let i = index">{{c.disease.name}}</li>
-                    </ul> 
-                  </div>
-              </div>
-              <div  *ngIf="child.name=='SERVICES'" class="services">
-                  <strong>Services</strong>
-                  <div [innerHTML]="structure.coreService"></div>
-                  <div  *ngIf="structure.otherSpecialistInside">
-                    <strong>Other specialist evaluations offered INSIDE the HCP</strong>
-                    <div [innerHTML]="structure.otherSpecialistInside"></div>
-                  </div>
-                  <div  *ngIf="structure.otherSpecialistOutside">
-                    <strong>Other specialist evaluations offered OUTSIDE the HCP</strong>
-                    <div [innerHTML]="structure.otherSpecialistOutside"></div>
-                  </div>
-                  <div  *ngIf="structure.service">
-                    <div [innerHTML]="structure.service"></div>
-                  </div>
 
-                  <div class="related relatedAss"  *ngIf="structure.type == 'association'">
-                    <button class="btnrelated" ion-button (click)="goToRelated(structure.id)" >
-                        See relatd hcp <br> center
-                    </button>
-                  </div>
 
-                  <div class="related relatedhcp"  *ngIf="structure.type != 'association'">
-                    <button class="btnrelated" ion-button (click)="goToRelated(structure.id)" >
-                      See related <br> association
-                    </button>
-                  </div>
+              <div *ngIf="structure.type=='hcp' && structure.phoneDirect!=null"
+                class="email-phone">
+                <strong>{{ 'Contacts' | translate }}</strong>
+                <span (click)="call(structure.phoneDirect)">{{structure.phoneDirect}}</span>
+                <span *ngIf="structure.secondPhone!=null" (click)="call(structure.secondPhone)">{{structure.secondPhone}}</span>
+                <span *ngIf="structure.emailDirect!=null" (click)="email(structure.emailDirect)">{{structure.emailDirect}}</span>
+                <span *ngIf="structure.secondEmail!=null" (click)="email(structure.secondEmail)">{{structure.secondEmail}}</span>
               </div>
-              <div  *ngIf="child.name=='OPENING HOURS'">
-                  <div class="opening-time">
-                      <div [innerHTML]="structure.openingTime"></div>
-                  </div>
+
+
+
+             <!-- <div class="email-phone" *ngFor="let c of structure.centerEmail; let i = index">
+                <strong>{{c.label}}</strong>
+                <span (click)="email(c.email)">{{c.email}}</span>
               </div>
+
+              <div class="email-phone" *ngFor="let c of structure.centerPhone; let i = index">
+                <strong>{{c.label}}</strong>
+                <span (click)="call(c.phone)">{{c.phone}}</span>
+              </div>-->
+
+              <div>
+                <span (click)="call(structure.phone)">{{structure.phone}}</span>
+              </div>
+              <div>
+                <span (click)="email(structure.email)">{{structure.email}}</span>
+              </div>
+            </div>
+            <div *ngIf="child.name=='TARGET DISEASES'">
+              <div>
+                <ul>
+                  <li *ngFor="let c of diseaseHcp; let i = index">{{c.disease.name}}</li>
+                  <li *ngFor="let c of diseaseAssociation; let i = index">{{c.disease.name}}</li>
+                </ul>
+              </div>
+            </div>
+            <div *ngIf="child.name=='SERVICES'" class="services">
+              <strong>{{ 'Scheda4' | translate }}</strong>
+              <div [innerHTML]="structure.coreService"></div>
+              <div *ngIf="structure.otherSpecialistInside">
+                <strong>{{ 'Scheda5' | translate }}</strong>
+                <div [innerHTML]="structure.otherSpecialistInside"></div>
+              </div>
+              <div *ngIf="structure.otherSpecialistOutside">
+                <strong>{{ 'Scheda6' | translate }}</strong>
+                <div [innerHTML]="structure.otherSpecialistOutside"></div>
+              </div>
+              <div *ngIf="structure.service">
+                <div [innerHTML]="structure.service"></div>
+              </div>
+
+              <div class="related relatedAss" *ngIf="structure.type == 'association'">
+                <button class="btnrelated" ion-button (click)="goToRelated(structure.associationId)" [innerHTML]="'SeeRelated1' | translate">
+
+                </button>
+              </div>
+
+              <div class="related relatedhcp" *ngIf="structure.type != 'association'">
+                <button class="btnrelated" ion-button (click)="goToRelated(structure.hcpCenterId)" [innerHTML]="'SeeRelated2' | translate">
+
+                </button>
+              </div>
+            </div>
+            <div *ngIf="child.name=='OPENING HOURS'">
+              <div class="opening-time">
+                <div [innerHTML]="structure.openingTime"></div>
+              </div>
+            </div>
           </ion-item>
         </ion-list-header>
       </ion-list>
     </ion-list-header>
   </ion-list>
-  
   <div class="action-button">
-      <button class="callbtn" ion-button icon-start (click)="call(structure.phoneDirect)" >
-        <ion-icon name="md-call"></ion-icon>
-        Call now
-      </button>
-        
-      <button class="emailbtn" (click)="email(structure.emailDirect)" ion-button icon-start>
-        <ion-icon name="md-mail"></ion-icon>
-        Send Email
-      </button>
-        
-      <button class="direction_blue" (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)" ion-button icon-start [ngClass]="{ 
+    <button class="callbtn" ion-button icon-start (click)="call(structure.phoneDirect)">
+      <ion-icon name="md-call"></ion-icon>
+      {{ 'Call' | translate }}
+    </button>
+
+    <button class="emailbtn" (click)="email(structure.emailDirect)" ion-button icon-start>
+      <ion-icon name="md-mail"></ion-icon>
+      {{ 'SendEmail' | translate }}
+    </button>
+    <button class="direction_blue"
+      (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)" ion-button icon-start
+      [ngClass]="{ 
       'direction_blue': structure.type != 'association',
       'direction_orange': structure.type == 'association' }">
-        <ion-icon name="md-walk"></ion-icon>
-        Directions
-      </button>
-            
+      <ion-icon name="md-walk"></ion-icon>
+      {{ 'Direction' | translate }}
+    </button>
   </div>
-  
-
-
-
-
 
 
 </ion-content>

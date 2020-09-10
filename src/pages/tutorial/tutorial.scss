@@ -29,11 +29,16 @@ page-tutorial {
 
   .btn-ctn {
     width: 100%;
+    position: absolute;
+    bottom: 70px;
   }
 
   ion-slide img {
-    height: calc(100% - 300px)!important;
+    height: calc(100% - 250px)!important;
     width: auto!important;
+    position: absolute;
+    right: 50%!important;
+    transform: translate(50%,0);
   }
   
   ion-slide p {

@@ -7,14 +7,15 @@
 <ion-header>
 
   <ion-navbar color="blue">
-    <ion-title>FAVORITE</ion-title>
+    <ion-title>{{ 'Favorite' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding no-bounce>
-    <p class="info" *ngIf="structures.length == 0">Add here your favourite HCP and/or Association by clicking on the little star inside their information card</p>
+    <p class="info" *ngIf="structures.length == 0">{{ 'Favorite1' | translate }}</p>
     <ion-slides>
+      
       <ion-slide [ngClass]="{'slidehcp': structure.type=='hcp', 'slideass': structure.type!='hcp'}" class="slide" *ngFor="let structure of structures">
         <h1 class="center-name"><strong>{{ structure.name | truncate:20 }}</strong></h1>
         <p class="center-info">{{ structure.deparment | truncate:20 }}</p>
@@ -23,15 +24,15 @@
         <div class="action-button">
           <button class="callbtn" ion-button icon-start (click)="call(structure.phoneDirect)" >
             <ion-icon name="md-call"></ion-icon>
-            Call now
+            {{ 'Call' | translate }}
           </button>
           <button class="emailbtn" (click)="email(structure.emailDirect)"ion-button icon-start>
             <ion-icon name="md-mail"></ion-icon>
-            Send Email
+            {{ 'SendEmail' | translate }}
           </button>
           <button class="direction" (click)="maps(structure.address, structure.zipcode, structure.city, structure.country)" ion-button icon-start>
             <ion-icon name="md-walk"></ion-icon>
-            Directions
+            {{ 'Direction' | translate }}
           </button>
         </div>
         <button id="goto-scheda" (click)="goTo(structure)" ion-button>

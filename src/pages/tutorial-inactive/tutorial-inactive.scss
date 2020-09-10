@@ -21,6 +21,9 @@ page-tutorial-inactive {
     ion-slide img {
       height: calc(100% - 170px)!important;
       width: auto!important;
+      position: absolute;
+      right: 50%!important;
+      transform: translate(50%,0);
     }
     
     ion-slide p {

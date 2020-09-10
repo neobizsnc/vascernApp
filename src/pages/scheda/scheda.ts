@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Platform, AlertController, } from 'ionic-angular';
-import { CallNumber } from '@ionic-native/call-number';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Http } from '@angular/http';
@@ -9,7 +8,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { RelatedPage } from '../related/related';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
-
+import { Globalization } from '@ionic-native/globalization';
+import { LanguageactiveProvider } from '../../providers/languageactive/languageactive';
+import {TranslateService} from '@ngx-translate/core';
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the SchedaPage page.
  *
@@ -32,11 +34,27 @@ export class SchedaPage {
   operatingSystem: any;
   uuid: any;
 
-  constructor(private uniqueDeviceID: UniqueDeviceID, private alertCtrl: AlertController, public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController, private callNumber: CallNumber) {
-    let localData = http.get('assets/structure.json').map(res => res.json().items);
-    localData.subscribe(data => {
-      this.information = data;
-    })
+  constructor(public callNumber: CallNumber, public translate: TranslateService, public lng: LanguageactiveProvider, private globalization: Globalization, private uniqueDeviceID: UniqueDeviceID, private alertCtrl: AlertController, public platform: Platform, public nativeStorage: NativeStorage, private iab: InAppBrowser, private launchNavigator: LaunchNavigator, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public viewCtrl: ViewController) {
+   
+
+    this.globalization.getPreferredLanguage()
+      .then(res => {
+          var filename = "structure-" + res.value.substring(0,2) + ".json";
+          let localData = http.get('assets/' + filename).map(res => res.json().items);
+          localData.subscribe(data => {
+            this.information = data;
+          });
+      })
+      .catch(e => {
+        let localData = http.get('assets/structure-en.json').map(res => res.json().items);
+        localData.subscribe(data => {
+          this.information = data;
+        });
+      });
+   
+    
+
+
     platform.ready().then((readySource) => { 
       if(platform.is('ios')) {
         this.operatingSystem = "ios";
@@ -68,11 +86,12 @@ export class SchedaPage {
 
   getDisease() {
     if(this.structure.type != "association") {
-      this.http.get('http://vascernapi.azurewebsites.net/api/diseaseapi/GetDiseaseHcpByCenterId/' + this.structure.id).map(res => res.json()).subscribe(data => {
+      this.http.get('http://vascern.azurewebsites.net/api/DiseasesApi/GetDiseaseHcpByCenterId/' + this.structure.hcpCenterId + '/english').map(res => res.json()).subscribe(data => {
         this.diseaseHcp = data;
       });
     } else {
-      this.http.get('http://vascernapi.azurewebsites.net/api/diseaseapi/GetDiseaseAssociationByCenterId/' + this.structure.id).map(res => res.json()).subscribe(data => {
+      //'/' + this.lng.languageActive
+      this.http.get('http://vascern.azurewebsites.net/api/DiseasesApi/GetDiseaseAssociationByCenterId/' + this.structure.associationId + '/english').map(res => res.json()).subscribe(data => {
         this.diseaseHcp = data;
       });
     }
@@ -111,7 +130,8 @@ export class SchedaPage {
 
 
   chekFavorite() {
-    this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/ChekOnlyFavorites/' + this.uuid + "/" + this.structure.id + "/" + this.structure.type + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+    var id = this.structure.type == "association" ? this.structure.associationId : this.structure.hcpCenterId;
+    this.http.get('http://vascern.azurewebsites.net/api/FavaritesApi/ChekOnlyFavorites/' + this.uuid + "/" + id + "/" + this.structure.type + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
       console.log(data)  
       if(data) {      
         this.isFavourite = true;
@@ -122,19 +142,33 @@ export class SchedaPage {
   }
 
   addRemoveFavourite(structure) {
-    this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/ChekFavorites/' + this.uuid + "/" + structure.id + "/" + structure.type + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => { 
+    var pop3 = ""
+    var pop4 = ""
+    var pop5 = ""
+    this.translate.get('pop3').subscribe((res: string) => {
+      pop3 = res;
+    });
+    this.translate.get('pop4').subscribe((res: string) => {
+      pop4 = res;
+    });
+    this.translate.get('pop5').subscribe((res: string) => {
+      pop5 = res;
+    });
+
+    var id = this.structure.type == "association" ? this.structure.associationId : this.structure.hcpCenterId;
+    this.http.get('http://vascern.azurewebsites.net/api/FavaritesApi/ChekFavorites/' + this.uuid + "/" + id + "/" + structure.type + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => { 
       if(data) {
         let alert = this.alertCtrl.create({
-          title: 'Information',
-          subTitle: 'Removed from favorites',
+          title: pop3,
+          subTitle: pop5,
           buttons: ['Ok']
         });
         alert.present();
         this.isFavourite = false;
       } else {
         let alert = this.alertCtrl.create({
-          title: 'Information',
-          subTitle: 'Added to favorites',
+          title: pop3,
+          subTitle: pop4,
           buttons: ['Ok']
         });
         alert.present();
@@ -143,9 +177,9 @@ export class SchedaPage {
     });
   }
 
-  goToRelated() {
+  goToRelated(id) {
     this.navCtrl.push(RelatedPage, {
-      id: this.structure.id,
+      id: id,
       type: this.structure.type
     });
   }

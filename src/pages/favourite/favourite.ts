@@ -10,6 +10,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 import { AlertController } from 'ionic-angular';
+import {TranslateService} from '@ngx-translate/core';
+import { LanguageactiveProvider } from '../../providers/languageactive/languageactive';
 
 /**
  * Generated class for the FavouritePage page.
@@ -30,7 +32,7 @@ export class FavouritePage {
   loading: any;
   uuid: any;
 
-  constructor(private alertCtrl: AlertController, private uniqueDeviceID: UniqueDeviceID, public nativeStorage: NativeStorage, public modalCtrl: ModalController,private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public lng: LanguageactiveProvider, public translate: TranslateService, private alertCtrl: AlertController, private uniqueDeviceID: UniqueDeviceID, public nativeStorage: NativeStorage, public modalCtrl: ModalController,private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private emailComposer: EmailComposer, public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -41,12 +43,13 @@ export class FavouritePage {
     this.structures = [];
     this.uniqueDeviceID.get().then((uuid: any) => {
       this.uuid = uuid;
+      console.log(uuid);
       this.getFavorites();
     }).catch((error: any) => console.log(error));
   }
 
   getFavorites() {
-    this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/GetPersonalFavorites/' + this.uuid + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+    this.http.get('http://vascern.azurewebsites.net/api/FavaritesApi/GetPersonalFavorites/' + this.uuid + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
       if(data.length != 0) {
         data.forEach(element => {
           this.loadStructure(element.structureId, element.type);
@@ -63,7 +66,7 @@ export class FavouritePage {
 
   loadStructure(id, type) {
     if(type == "hcp") {
-      this.http.get('http://vascernapi.azurewebsites.net/api/HcpCenterApi/' + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+      this.http.get('http://vascern.azurewebsites.net/api/HcpCentersApi/GetHcpByIdCulture/' + id + "/english?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
         this.structures.push(data);
         if(this.structures.length == 1) {
           this.slides.slidesPerView = 1 ;
@@ -72,7 +75,8 @@ export class FavouritePage {
         }
       });
     } else {
-      this.http.get('http://vascernapi.azurewebsites.net/api/AssociationApi/' + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+      //"/" + this.lng.languageActive + "?"
+      this.http.get('http://vascern.azurewebsites.net/api/HcpCentersApi/GetAssByIdCulture/' + id + "/english?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
         this.structures.push(data);
         if(this.structures.length == 1) {
           this.slides.slidesPerView = 1 ;
@@ -117,21 +121,34 @@ export class FavouritePage {
   }
 
   deleteFavourite(id) { 
+
+    var pop1 = ""
+    var pop2 = ""
+
+
+    this.translate.get('pop1').subscribe((res: string) => {
+      pop1 = res;
+    });
+    this.translate.get('pop2').subscribe((res: string) => {
+      pop2 = res;
+    });
+
+
     let alert = this.alertCtrl.create({
-      title: 'Confirm Delete',
-      message: 'Are you sure you want to remove this card from your favorites?',
+      title: pop1,
+      message: pop2,
       buttons: [
         {
-          text: 'No',
+          text: 'NO',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'YES',
+          text: 'OK',
           handler: () => {
-            this.http.get('http://vascernapi.azurewebsites.net/api/Favourites/DeletePersonalFavorites/' + this.uuid + "/" + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
+            this.http.get('http://vascern.azurewebsites.net/api/FavaritesApi/DeletePersonalFavorites/' + this.uuid + "/" + id + "?" + Math.random().toString(36)).map(res => res.json()).subscribe(data => {
               this.structures = [];
               this.getFavorites();
             });

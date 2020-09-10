@@ -77,6 +77,9 @@ page-home {
         
         color: #C76303;
       }
+      .green {
+        color: #20AC83;
+      }
     }
 
     ion-list {
@@ -178,6 +181,21 @@ page-home {
         -moz-border-radius: 8px;
         border-radius: 8px;
         height: 100%;
+      }
+
+      .slideBGAN {
+        align-items: flex-start!important;
+        padding: 30px 55px!important;
+        justify-content: flex-start!important;
+        background: #20AC83;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        height: 100%;
+      }
+
+      .ico-green {
+        color: #20AC83;
       }
       
       .slide-zoom {

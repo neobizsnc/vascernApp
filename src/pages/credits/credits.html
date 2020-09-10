@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="blue">
-    <ion-title><strong>CREDITS</strong></ion-title>
+    <ion-title><strong>{{ 'Credits' | translate }}</strong></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,16 +16,22 @@
 <ion-content padding>
   <div class="credits-img">
       <img src="assets/imgs/EU_flag_and_co-funded_by_health_programme.png">
-      <img src="assets/imgs/ern-logo copy.png">
-      <img src="assets/imgs/hopital-bichat-claude-bernard.png">
       <img src="assets/imgs/Logo-APHP.png">
+      <!--<img src="assets/imgs/ern-logo copy.png">-->
+      <img src="assets/imgs/earn23.png">
+     <!-- <img src="assets/imgs/hopital-bichat-claude-bernard.png">-->
+      
+      <img src="assets/imgs/vena.jpg">
   </div>
   <div class="info">
-      <strong class="str">DEVELOPER</strong>
-      <p><strong>Dr. Alessandro Pini</strong></p>
-      <p>Rare Desease Center</p>
-      <p>Milan - Italy</p>
-      <p>alex_pini@libero.it</p>
+      <strong class="str">{{ 'Developer' | translate }}</strong>
+      <p>Dr. Alessandro Pini, VASCERN App Advisor, Centro di CardioGenetica Vascolare
+        Policlinico San Donato, Milan, Italy</p>
+      <!--<p>{{ 'Credits1' | translate }}</p>-->
+      <p>VASCERN Coordination, Hôpital Bichat-Claude Bernard, AP-HP, Paris, France</p>
+      <p>vascern.coordination@aphp.fr</p>
+      <p>credits: media for health s.r.l.</p>
+      <p>info@m4h.it</p>
   </div>
 
 </ion-content>

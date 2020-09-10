@@ -7,7 +7,7 @@
 
 <ion-header>
 <ion-navbar color="blue">
-  <ion-title><strong>TUTORIAL</strong></ion-title>
+  <ion-title><strong>{{ 'Tutorial' | translate }}</strong></ion-title>
 </ion-navbar>
 </ion-header>
 
@@ -16,7 +16,7 @@
         <ion-slide>
           <ion-row>
               <ion-col>
-                  <p><strong>It’s simple! <br/> Search for the <br/> rare disease</strong></p>
+                  <p [innerHTML]="'Tutorial1' | translate"></p>
                   <img src="assets/imgs/tutorial1.png" />
               </ion-col>
             </ion-row>
@@ -24,7 +24,7 @@
         <ion-slide>
           <ion-row>
               <ion-col>
-                <p><strong>See the <br/> structures <br/> nearby</strong></p>
+                <p [innerHTML]="'Tutorial2' | translate"></p>
                 <img src="assets/imgs/tutorial2.png" />
               </ion-col>
             </ion-row>
@@ -32,7 +32,7 @@
         <ion-slide>
           <ion-row>
             <ion-col>
-                <p><strong>Get all the  <br/> information you <br/> want</strong></p>
+                <p [innerHTML]="'Tutorial3' | translate"></p>
                 <img src="assets/imgs/tutorial3.png" />
             </ion-col>
           </ion-row>

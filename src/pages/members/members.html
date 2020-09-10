@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="blue">
-    <ion-title>MEMBERS</ion-title>
+    <ion-title>{{ 'Members' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,8 +20,8 @@
 
     <div *ngFor="let k of c.values; let i = index" (click)="goTo(k)">
      
-      <div [ngClass]="{'structures': k.type == 'hcp', 'association': k.type != 'hcp'}" class="box">
-          <span>{{k.name | truncate: 80 }}</span>
+      <div [ngClass]="{'structures': k.type == 'hcp', 'association': k.type == 'association', 'hcp-n': k.isAffiliated == true && k.isEarn == false}" class="box">
+          <span>{{k.name | truncate: 80 }} {{k.type}}</span>
           <button class="goto-scheda" ion-button>
             <img src="assets/imgs/Open_Button_Card.svg">
           </button> 

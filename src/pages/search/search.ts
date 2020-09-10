@@ -6,6 +6,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { Keyboard } from '@ionic-native/keyboard';
+import { LanguageactiveProvider } from '../../providers/languageactive/languageactive';
 
 /**
  * Generated class for the SearchPage page.
@@ -33,7 +34,7 @@ export class SearchPage {
   @ViewChild(Content)
   content:Content;
 
-  constructor(public keyboard: Keyboard, public nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public lng: LanguageactiveProvider, public keyboard: Keyboard, public nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -42,8 +43,12 @@ export class SearchPage {
 
   ngAfterViewInit() {
     this.content.ionScrollStart.subscribe((data)=>{
-      this.keyboard.close();
+      this.keyboard.hide()
     });
+  }
+
+  test() {
+    this.keyboard.hide()
   }
 
   ionViewDidLoad() {
@@ -65,7 +70,9 @@ export class SearchPage {
   }
 
   loadStructure() {
-    this.http.get('http://vascernapi.azurewebsites.net/api/diseaseApi').map(res => res.json()).subscribe(data => {
+    //http://vascern.azurewebsites.net/api/DiseasesApi/GetDiseaseByCulture/en NEW 
+    //http://vascernapi.azurewebsites.net/api/diseaseApi OLD
+    this.http.get('http://vascern.azurewebsites.net/api/DiseasesApi/GetDiseaseByCulture/' + this.lng.languageActive).map(res => res.json()).subscribe(data => {
       this.structures = data;
       this.structuresCopy = data;
       this.sort();
@@ -81,7 +88,10 @@ export class SearchPage {
         this.seachStructures = data;
         this.structures = data;
       },
-      error => console.error(error)
+      error => {
+        this.seachStructures = [];
+        this.structures = [];
+      }
     );
   }
 
@@ -89,10 +99,11 @@ export class SearchPage {
 
     /*this.navCtrl.push(SearchResultPage, {
       name: c.name,
-      orphaCode: c.orphacode,
-      website: c.website,
-      id: c.id
-    });*/
+      orphaCode: c.disease.orphacode,
+      website: c.disease.website,
+      id: c.disease.id
+    });
+  }*/
 
     this.seachStructures.push(c);
     this.nativeStorage.clear()
@@ -102,9 +113,9 @@ export class SearchPage {
         () => {
           this.navCtrl.push(SearchResultPage, {
             name: c.name,
-            orphaCode: c.orphacode,
-            website: c.website,
-            id: c.id
+            orphaCode: c.disease.orphacode,
+            website: c.disease.website,
+            id: c.disease.id
           });
           console.log('Stored item!')
         }, 
